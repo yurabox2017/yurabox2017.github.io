@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import ModalOverlay from "./ModalOverlay";
 import './Modal.css'
 function Modal({ visible, children }) {
     return (
         <>
             <div
-                className="modal fade show "
+                className="modal fade show modal-container"
                 tabIndex="-1"
                 role="dialog">
                 <div className="modal-dialog modal-lg" role="document">
@@ -25,4 +26,8 @@ function Modal({ visible, children }) {
         </>
     )
 }
+Modal.propTypes = {
+    visible: PropTypes.bool,
+    children: PropTypes.element
+};
 export default Modal;
