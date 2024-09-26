@@ -1,19 +1,12 @@
 import ModalOverlay from "./ModalOverlay";
+import './Modal.css'
 function Modal({ visible, children }) {
     return (
         <>
             <div
                 className="modal fade show "
                 tabIndex="-1"
-                role="dialog"
-                style={{
-                    display: 'block',
-                    width: '39%',
-                    height: '88%',
-                    left: '30%',
-                    overflow: 'hidden',
-                }}
-            >
+                role="dialog">
                 <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header border border-0 bg-custom-black ">

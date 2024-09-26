@@ -1,4 +1,5 @@
-import TrashButton from "./buttons/TrashButton";
+import TrashButton from "../TrashButton/TrashButton";
+
 function Product({ title, price, description }) {
     return (
         <div className="card text-center" style={{ width: '300px'}}>
