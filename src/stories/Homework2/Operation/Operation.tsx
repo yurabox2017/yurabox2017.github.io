@@ -7,7 +7,7 @@ function Operation({ price, images, category, title, description }: IOperation) 
     return (
         <div className="card text-center" style={{ width: '300px' }}>
             {images?.map((x, i) => (
-                <img src={x} className="card-img-top img-thumbnail" alt="..." style={{ objectFit: "none" }} />
+                <img key={i} src={x} className="card-img-top img-thumbnail" alt="..." style={{ objectFit: "none" }} />
             ))}
 
             <div className="card-body">
