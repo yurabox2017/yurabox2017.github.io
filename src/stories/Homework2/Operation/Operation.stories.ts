@@ -17,7 +17,7 @@ export const PrimaryOperation: Story = {
         price: 10000,
         title: "Веник",
         description: "Веник с длиной ручкой",
-        category:"товары для дома"
+        category: "товары для дома"
 
     }
 };

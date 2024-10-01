@@ -1,10 +1,12 @@
+import React from "react";
 import TrashButton from "../TrashButton/TrashButton";
+import IOperation from "../Interfaces/IOperation";
 
-function Operation({ price, images, category, title, description }) {
+function Operation({ price, images, category, title, description }: IOperation) {
 
     return (
         <div className="card text-center" style={{ width: '300px' }}>
-            {images.map((x, i) => (
+            {images?.map((x, i) => (
                 <img src={x} className="card-img-top img-thumbnail" alt="..." style={{ objectFit: "none" }} />
             ))}
 

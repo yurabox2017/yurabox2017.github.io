@@ -1,12 +1,13 @@
-import PropTypes from 'prop-types'
+import React from 'react';
 import ModalOverlay from "./ModalOverlay";
-import './Modal.css'
-function Modal({ visible, children }) {
+import './Modal.css';
+import IModal from '../Interfaces/IModal';
+
+function Modal({ visible, children }: IModal) {
     return (
         <>
             <div
                 className="modal fade show modal-container"
-                tabIndex="-1"
                 role="dialog">
                 <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
@@ -26,8 +27,5 @@ function Modal({ visible, children }) {
         </>
     )
 }
-Modal.propTypes = {
-    visible: PropTypes.bool,
-    children: PropTypes.element
-};
+
 export default Modal;

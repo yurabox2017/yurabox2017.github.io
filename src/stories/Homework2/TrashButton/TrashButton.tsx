@@ -1,6 +1,8 @@
-
+import React from 'react';
 import PropTypes from 'prop-types';
-function TrashButton({ counter }) {
+import ITrashButton from '../Interfaces/ITrashButton';
+
+function TrashButton({ counter }: ITrashButton) {
     return (
         (counter == 0 ?
             <button disabled className="btn btn-primary">в корзину</button> :
@@ -12,7 +14,4 @@ function TrashButton({ counter }) {
         )
     );
 }
-TrashButton.propTypes = {
-    counter: PropTypes.number
-};
 export default TrashButton;

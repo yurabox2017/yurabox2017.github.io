@@ -1,3 +1,4 @@
+import React from "react";
 function TrashProduct() {
     return (
         <div className="card text-center" style={{ width: '300px' }}>
