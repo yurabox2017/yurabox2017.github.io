@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Product from './Product';
+import ShortProduct from './ShortProduct';
 
 
-const meta: Meta<typeof Product> = {
-    title: 'Homework2/Product',
-    component: Product,
+const meta: Meta<typeof ShortProduct> = {
+    title: 'Homework2/ShortProduct',
+    component: ShortProduct,
     tags: ['autodocs'],
     parameters: {
         layout: 'fullscreen',
@@ -18,6 +18,7 @@ export const PrimaryProduct: Story = {
     args: {
         title: "Чистящие средства",
         price: 5000,
-        description: "Хорошо очищает любые загрязнения"
+        description: "Хорошо очищает любые загрязнения",
+        image: "/free-icon-household-7029117.png"
     }
 };

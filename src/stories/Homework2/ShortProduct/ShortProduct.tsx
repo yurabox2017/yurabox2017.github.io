@@ -1,11 +1,12 @@
-import IProduct from "../Interfaces/IProduct";
+
+import IShortProduct from "../Interfaces/IShortProduct";
 import TrashButton from "../TrashButton/TrashButton";
 import React from "react";
 
-function Product({ title, price, description }: IProduct) {
+function ShortProduct({ title, price, description, image }: IShortProduct) {
     return (
         <div className="card text-center" style={{ width: '300px' }}>
-            <img src="/free-icon-household-7029117.png" className="card-img-top" alt="..." style={{ objectFit: "none" }} />
+            <img src={image} className="card-img-top" alt="..." style={{ objectFit: "none" }} />
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">{price}</h6>
@@ -16,4 +17,4 @@ function Product({ title, price, description }: IProduct) {
     );
 }
 
-export default Product;
+export default ShortProduct;

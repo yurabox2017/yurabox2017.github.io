@@ -1,4 +1,4 @@
-export default interface IOperation {
+export default interface IFullProduct {
     price: number,
     images: string[],
     category: string,

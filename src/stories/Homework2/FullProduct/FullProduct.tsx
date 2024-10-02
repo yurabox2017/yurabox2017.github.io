@@ -1,8 +1,8 @@
 import React from "react";
 import TrashButton from "../TrashButton/TrashButton";
-import IOperation from "../Interfaces/IOperation";
+import IFullProduct from "../Interfaces/IFullProduct";
 
-function Operation({ price, images, category, title, description }: IOperation) {
+function FullProduct({ price, images, category, title, description }: IFullProduct) {
 
     return (
         <div className="card text-center" style={{ width: '300px' }}>
@@ -20,4 +20,4 @@ function Operation({ price, images, category, title, description }: IOperation) 
         </div>
     )
 }
-export default Operation;
+export default FullProduct;

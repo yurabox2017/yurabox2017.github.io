@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Operation from './Operation';
+import FullProduct from './FullProduct';
 
 
-const meta: Meta<typeof Operation> = {
-    title: 'Homework2/Operation',
-    component: Operation,
+const meta: Meta<typeof FullProduct> = {
+    title: 'Homework2/FullProduct',
+    component: FullProduct,
     tags: ['autodocs']
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const PrimaryOperation: Story = {
+export const PrimaryFullProduct: Story = {
     args: {
         images: ['/free-icon-cleaning-9012135.png', '/free-icon-cleaning-9717764.png'],
         price: 10000,
