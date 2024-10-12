@@ -1,20 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
 import './App.css';
+import { Theme, ThemeContext } from 'src/context/themeContext';
+import { LocalizationInitiator } from 'src/localization/LocalizationInitiator';
+import Layout from 'src/components/layouts/Layout';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n, { Locale } from 'src/localization/settings';
+import { translation } from 'src/localization/translation';
+import Main from 'src/widgets/main/Main';
+
+
 
 function App() {
+  let [theme, setTheme] = useState<Theme>("light");
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <ul className='text-left'>
-          <li> В компании по импортозамещению необходимо переписать проект с Blazor на React.</li>
-          <li> Владею Blazor, AspNet, net6</li>
-          <li> FullStack разработчик, разрабатываю информационно-аналитическую систему.</li>
-          <li> 2022-2023гг проходил обучение по курсу AspNet core Otus.</li>
-        </ul>
-      </header>
-    </div>
+    <>
+      <LocalizationInitiator />
+      <I18nextProvider i18n={i18n} defaultNS={'translation'}>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <div className={`App ${theme} border border-bottom-dark`}>
+            <Layout />
+            <Main />
+          </div>
+        </ThemeContext.Provider >
+      </I18nextProvider>
+    </>
   );
 }
 

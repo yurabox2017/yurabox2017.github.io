@@ -1,6 +1,6 @@
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  staticDirs: ['../src/stories/Homework2/assets'],
+  staticDirs: ['../src/assets'],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",

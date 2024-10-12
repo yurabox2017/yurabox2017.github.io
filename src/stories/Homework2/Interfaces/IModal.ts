@@ -1,5 +1,8 @@
-import { ReactElement, ReactNode } from "react"
-export default interface IModal extends ReactElement {
+import React from "react"
+
+export default interface IModal {
+    children?: React.ReactNode,
     visible: boolean,
-    children: ReactNode
+    header: string,
+    onClose: () => void
 }

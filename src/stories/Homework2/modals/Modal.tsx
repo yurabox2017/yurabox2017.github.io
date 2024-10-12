@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import ModalOverlay from "./ModalOverlay";
 import './Modal.css';
 import IModal from '../Interfaces/IModal';
 
-function Modal({ visible, children }: IModal) {
+// const modalRoot = document.getElementById('root-modal');
+
+function Modal({ visible, header = '', children, onClose }: IModal) {
+
+    // return ReactDOM.createPortal(
     return (
         <>
             <div
                 className="modal fade show modal-container"
-                role="dialog">
+                role="dialog"
+            >
                 <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header border border-0 bg-custom-black ">
-                            <h5 className="modal-title bg-custom-black text-white pl-10">
-                                <p className="text text_type_main-large"></p>
+                            <h5 className="modal-title bg-custom-black text-dark pl-10">
+                                <p className="text text_type_main-large">{header}</p>
                             </h5>
-                            <h2 className="text-dark">
+                            <h2
+                                className="text-dark"
+                                onClick={onClose}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 &times;
                             </h2>
                         </div>
@@ -26,6 +36,9 @@ function Modal({ visible, children }: IModal) {
             <ModalOverlay />
         </>
     )
+    // ,
+    // modalRoot
+    // );
 }
 
 export default Modal;
