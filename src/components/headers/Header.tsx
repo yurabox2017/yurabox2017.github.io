@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { withTranslation } from 'react-i18next';
 
 import Logo from '../logo/Logo';
-import { LangSwitcher } from 'src/features/LangSwitcher';
+import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
 import ChangeThemeButton from '../buttons/ChangeThemeButton';
 
 export const HeaderOrigin: FC = () => {

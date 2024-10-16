@@ -1,6 +1,6 @@
 import React from "react";
 import TrashButton from "../TrashButton/TrashButton";
-import IFullProduct from "../Interfaces/IFullProduct";
+import IFullProduct from "../../../Interfaces/IFullProduct";
 
 function FullProduct({ price, images, category, title, description }: IFullProduct) {
 

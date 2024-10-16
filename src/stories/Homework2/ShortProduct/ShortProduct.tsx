@@ -1,5 +1,5 @@
 
-import IShortProduct from "../Interfaces/IShortProduct";
+import IShortProduct from "../../../Interfaces/IShortProduct";
 import TrashButton from "../TrashButton/TrashButton";
 import React from "react";
 

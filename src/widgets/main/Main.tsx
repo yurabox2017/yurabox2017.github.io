@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../app/logo.svg';
 import { useTranslation } from 'react-i18next';
+import Modal from '../modal/Modal';
 
 export default function Main() {
   const { t } = useTranslation();
+  const [visible, setVisible] = useState(false);
+  const onOpen = () => {
+    setVisible(true);
+  };
+  const onClosed = () => {
+    setVisible(false);
+  };
 
   return (
     <main className="container">
@@ -15,6 +23,12 @@ export default function Main() {
           <li> {t(`key3`)}</li>
           <li>{t(`key4`)}</li>
         </ul>
+        <button className="btn btn-primary w-50" onClick={onOpen}>
+          Открыть модальное окно
+        </button>
+        <Modal visible={visible} header="" onClose={onClosed}>
+          <h1>Привет мир!</h1>
+        </Modal>
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ITrashButton from '../Interfaces/ITrashButton';
+import ITrashButton from '../../../Interfaces/ITrashButton';
 
 function TrashButton({ counter }: ITrashButton) {
     return (
