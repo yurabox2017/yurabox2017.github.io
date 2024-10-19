@@ -1,6 +1,6 @@
 import React from "react";
 import "./Layout.css"
-import { Header } from "../headers/Header";
+import { Header } from "../Header";
 
 function Layout() {
     return (

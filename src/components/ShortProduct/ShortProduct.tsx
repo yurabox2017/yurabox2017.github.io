@@ -1,5 +1,5 @@
-import { TrashButton } from "../TrashButton/TrashButton";
-import IShortProduct from '../../../Interfaces/IShortProduct';
+import IShortProduct from 'src/Interfaces/IShortProduct';
+import { TrashButton } from '../TrashButton/TrashButton';
 
 import React from 'react';
 

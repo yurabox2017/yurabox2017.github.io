@@ -4,18 +4,15 @@ import './App.css';
 import { Theme, ThemeContext } from 'src/context/themeContext';
 import { LocalizationInitiator } from 'src/localization/LocalizationInitiator';
 import Layout from 'src/components/layouts/Layout';
-import { I18nextProvider, useTranslation } from 'react-i18next';
-import i18n, { Locale } from 'src/localization/settings';
-import { translation } from 'src/localization/translation';
+import { I18nextProvider } from 'react-i18next';
+import i18n from 'src/localization/settings';
 import Main from 'src/widgets/main/Main';
 
-
-
 function App() {
-  let [theme, setTheme] = useState<Theme>("light");
+  let [theme, setTheme] = useState<Theme>('light');
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -27,7 +24,7 @@ function App() {
             <Layout />
             <Main />
           </div>
-        </ThemeContext.Provider >
+        </ThemeContext.Provider>
       </I18nextProvider>
     </>
   );

@@ -11,7 +11,7 @@ function Modal({ visible, header = '', children, onClose }: IModal) {
     ? ReactDOM.createPortal(
         <>
           <div className="modal fade show modal-container" role="dialog">
-            <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-dialog modal-lg modal-dialog-scrollable" role="document">
               <div className="modal-content">
                 <div className="modal-header border border-0 bg-custom-black ">
                   <h5 className="modal-title bg-custom-black text-dark pl-10">

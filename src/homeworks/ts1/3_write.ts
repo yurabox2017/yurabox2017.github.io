@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 /**
  * Функции написанные здесь пригодятся на последующих уроках
  * С помощью этих функций мы будем добавлять элементы в список для проверки динамической загрузки
@@ -44,58 +44,58 @@ import { faker } from "@faker-js/faker";
  * - type ('Profit')
  * */
 export type Category = {
-    id: number,
-    name: string,
-    photo?: string
+  id: number;
+  name: string;
+  photo?: string;
 };
 
 export type Product = {
-    id: number,
-    name: string,
-    photo: string,
-    desc?: string,
-    createdAt: string,
-    oldPrice?: number,
-    price: number
-    category: Category
+  id: number;
+  name: string;
+  photo: string;
+  desc?: string;
+  createdAt: string;
+  oldPrice?: number;
+  price: number;
+  category: Category;
 };
 
 export type Cost = {
-    id: string,
-    name: string,
-    desc?: string
-    createdAt: string,
-    amount: number,
-    category: Category,
-    type: Cost
+  id: string;
+  name: string;
+  desc?: string;
+  createdAt: string;
+  amount: number;
+  category: Category;
+  type: Cost;
 };
 
 export type Profit = {
-    id: string,
-    name: string,
-    desc?: string
-    createdAt: string,
-    amount: number,
-    category: Category,
-    type: Profit
+  id: string;
+  name: string;
+  desc?: string;
+  createdAt: string;
+  amount: number;
+  category: Category;
+  type: Profit;
 };
 /**
  * Создает случайный продукт (Product).
  * Принимает дату создания (строка)
  * */
 export const createRandomProduct = (createdAt: string): Product => ({
+  id: faker.number.int(),
+  name: faker.commerce.product.name,
+  photo: faker.image.avatar(),
+  desc: 'desc',
+  createdAt: createdAt,
+  oldPrice: +faker.commerce.price({ min: 1000, max: 5000 }),
+  price: +faker.commerce.price({ min: 1000, max: 5000 }),
+  category: {
     id: faker.number.int(),
-    name: faker.person.fullName(),
+    name: faker.company.name(),
     photo: faker.image.avatar(),
-    desc: "desc",
-    createdAt: createdAt,
-    oldPrice: faker.number.float(),
-    price: faker.number.float(),
-    category: {
-        id: faker.number.int(),
-        name: faker.company.name(),
-        photo: faker.image.avatar()
-    }
+  },
 });
 
 /**
@@ -103,17 +103,15 @@ export const createRandomProduct = (createdAt: string): Product => ({
  * Принимает дату создания (строка)
  * */
 export const createRandomOperation = (createdAt: string): Cost | Profit => ({
-    id: faker.string.sample(),
-    createdAt: createdAt,
-    name: faker.person.fullName(),
-    desc: "desc",
-    amount: faker.number.int(),
-    category: {
-        id: faker.number.int(),
-        name: faker.company.name(),
-        photo: faker.image.avatar()
-    },
-    type: this
-
+  id: faker.string.sample(),
+  createdAt: createdAt,
+  name: faker.person.fullName(),
+  desc: 'desc',
+  amount: faker.number.int(),
+  category: {
+    id: faker.number.int(),
+    name: faker.company.name(),
+    photo: faker.image.avatar(),
+  },
+  type: this,
 });
-
