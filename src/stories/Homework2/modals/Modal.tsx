@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import ModalOverlay from "./ModalOverlay";
 import './Modal.css';
-import IModal from '../../../Interfaces/IModal';
+import IModal from '../../../entities/interfaces/IModal';
 
 // const modalRoot = document.getElementById('root-modal');
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import ITrashButton from '../../../Interfaces/ITrashButton';
+import ITrashButton from '../../../entities/interfaces/ITrashButton';
 
 export const TrashButton = ({ counter }: ITrashButton) => {
   return counter == 0 ? (

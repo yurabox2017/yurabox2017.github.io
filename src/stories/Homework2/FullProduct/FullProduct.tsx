@@ -1,5 +1,5 @@
 import React from "react";
-import IFullProduct from "../../../Interfaces/IFullProduct";
+import IFullProduct from "../../../entities/interfaces/IFullProduct";
 import { TrashButton } from "../TrashButton/TrashButton";
 function FullProduct({ price, images, category, title, description }: IFullProduct) {
 

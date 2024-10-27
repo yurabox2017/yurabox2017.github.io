@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import logo from '../../app/logo.svg';
 import { useTranslation } from 'react-i18next';
 import Modal from '../modal/Modal';
-import { ListProduct } from 'src/components/ListProduct/ListProduct';
 import { createRandomProduct } from 'src/homeworks/ts1/3_write';
 import { useInView } from 'react-intersection-observer';
+import { ListProduct } from 'src/shared/ui/listProduct';
+
 
 export default function Main() {
   const [visible, setVisible] = useState(false);
