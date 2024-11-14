@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import IFullProduct from 'src/entities/interfaces/IFullProduct';
-import { FullProduct } from '../fullProduct/FullProduct';
+import { FullProduct } from '../FullProduct';
+import FuncProps from 'src/entities/interfaces/IFuncProps';
 
-
-export const ListProduct: FC<{ products: IFullProduct[] }> = ({ products }) => {
+export const ListProduct: FC<FuncProps> = ({ products }) => {
   return (
     <>
       {products.map((product, i: number) => (

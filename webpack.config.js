@@ -14,7 +14,12 @@ module.exports = (_, args) => {
     devtool: 'source-map',
     context: src,
     devServer: {
-      open: true,
+      open:true,
+      // open: {
+      //   app: {
+      //     name: 'chrome',
+      //   },
+      // },
       port,
       hot: true,
       historyApiFallback: true,
