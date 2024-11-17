@@ -7,7 +7,7 @@ export const ListProduct: FC<FuncProps> = ({ products }) => {
   return (
     <>
       {products.map((product, i: number) => (
-        <FullProduct {...product} />
+        <FullProduct key={i} {...product} />
       ))}
     </>
   );
