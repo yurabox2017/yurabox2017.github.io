@@ -44,7 +44,7 @@ function Login() {
           className={cn(['form-control', errors.email && 'is-invalid'])}
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
-          {...register('email', { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
+          {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
           required
         />
       </div>
