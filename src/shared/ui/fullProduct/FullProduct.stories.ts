@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import FullProduct from './FullProduct';
+import { FullProduct } from './FullProduct';
+
 
 
 const meta: Meta<typeof FullProduct> = {

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../../app/logo.svg';
 import { useTranslation } from 'react-i18next';
-import Modal from '../modal/Modal';
 import { createRandomProduct } from 'src/homeworks/ts1/3_write';
 import { useInView } from 'react-intersection-observer';
 import { ListProduct } from 'src/shared/ui/listProduct';
-
+import Modal from 'src/shared/ui/modals/modal/Modal';
 
 export default function Main() {
   const [visible, setVisible] = useState(false);
@@ -37,7 +36,7 @@ export default function Main() {
     if (inView) {
       addProduct();
     }
-  }, [addProduct,inView]);
+  }, [addProduct, inView]);
 
   const onOpen = () => {
     setVisible(true);

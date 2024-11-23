@@ -1,7 +1,7 @@
-
 import React, { memo } from 'react';
-import { TrashButton } from '../trashButton';
+
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
+import { TrashButton } from '../trashButton';
 
 const ShortProduct = memo(function ShortProduct({ title, price, description, image }: IShortProduct) {
   return (
@@ -15,7 +15,6 @@ const ShortProduct = memo(function ShortProduct({ title, price, description, ima
       </div>
     </div>
   );
-})
-
+});
 
 export default ShortProduct;
