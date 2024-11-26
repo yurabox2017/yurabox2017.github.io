@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useState } from 'react';
 import { TrashButton } from '../trashButton';
 import IFullProduct from 'src/entities/interfaces/IFullProduct';
 
+export const FullProduct = memo(function FullProduct({ price, images, category, title, description }: IFullProduct) {
 
-export const FullProduct: FC<IFullProduct> = ({ price, images, category, title, description }) => {
   return (
     <div className="card text-center" style={{ width: '300px' }}>
-
       {images?.map((image, i) => (
         <img key={i} src={image} className="card-img-top img-thumbnail" alt="..." style={{ objectFit: 'none' }} />
       ))}
@@ -20,4 +19,4 @@ export const FullProduct: FC<IFullProduct> = ({ price, images, category, title, 
       </div>
     </div>
   );
-}
+});

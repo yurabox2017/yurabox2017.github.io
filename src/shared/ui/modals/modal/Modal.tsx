@@ -13,13 +13,15 @@ function Modal({ visible, header = '', children, onClose }: IModal) {
           <div className="modal fade show modal-container" role="dialog">
             <div className="modal-dialog modal-lg modal-dialog-scrollable" role="document">
               <div className="modal-content">
-                <div className="modal-header border border-0 bg-custom-black ">
-                  <h5 className="modal-title bg-custom-black text-dark pl-10">
-                    <p className="text text_type_main-large">{header}</p>
-                  </h5>
-                  <h2 className="text-dark" onClick={onClose} style={{ cursor: 'pointer' }}>
-                    &times;
-                  </h2>
+                <div className="modal-header">
+                  <h5 className="modal-title">{header}</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={onClose}
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
                 </div>
                 <div className="modal-body bg-custom-black">{children}</div>
               </div>
