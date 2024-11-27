@@ -5,7 +5,8 @@ import UserProfile from 'src/shared/ui/profile/UserProfile';
 import Error from 'src/pages/error/Error';
 import ListProductPage from 'src/pages/ListProduct/ListProductPage';
 import TrashProduct from 'src/shared/ui/trashProduct/TrashProduct';
-import { AddEditProductModal } from 'src/shared/ui/modals/modal/AddEditProductModal';
+import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
+import { EditProductModal } from 'src/shared/ui/modals/modal/EditProductModal';
 
 export const routes = createBrowserRouter([
   {
@@ -30,11 +31,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/listProduct/edit',
-        Component: () => AddEditProductModal('edit'),
+        Component: EditProductModal,
       },
       {
         path: '/listProduct/add',
-        Component: () => AddEditProductModal('add'),
+        Component: AddProductModal,
       },
     ],
   },
