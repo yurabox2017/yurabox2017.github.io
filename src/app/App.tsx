@@ -30,7 +30,7 @@ function App() {
           <div className={`App bg-${theme} border border-bottom-dark`}>
             <BrowserRouter>
               <Routes>
-                <Route path="/" Component={Layout}>
+                <Route Component={Layout}>
                   <Route path="/" Component={Main} />
                   <Route path="/userProfile" Component={UserProfile} />
                   <Route path="/trash" Component={TrashProduct} />
