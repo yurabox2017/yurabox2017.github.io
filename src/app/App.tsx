@@ -28,19 +28,7 @@ function App() {
       <I18nextProvider i18n={i18n} defaultNS={'translation'}>
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div className={`App bg-${theme} border border-bottom-dark`}>
-            <BrowserRouter>
-              <Routes>
-                <Route Component={Layout}>
-                  <Route path="/" Component={Main} />
-                  <Route path="/userProfile" Component={UserProfile} />
-                  <Route path="/trash" Component={TrashProduct} />
-                  <Route path="/listProduct" Component={ListProductPage} />
-                  <Route path="/listProduct/edit" Component={EditProductModal} />
-                  <Route path="/listProduct/edit" Component={AddProductModal} />
-                </Route>
-                <Route path="*" Component={Error} />
-              </Routes>
-            </BrowserRouter>
+            <RouterProvider router={routes} />
           </div>
         </ThemeContext.Provider>
       </I18nextProvider>

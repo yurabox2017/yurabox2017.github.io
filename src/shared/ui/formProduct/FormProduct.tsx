@@ -42,7 +42,7 @@ const FormProduct = () => {
         />
       </div>
       <div className="mb-3">
-        <label className="form-label">Title</label>
+        <label className="form-label">Description</label>
         <input
           type="text"
           className={cn(['form-control', errors.description && 'is-invalid'])}

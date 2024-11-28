@@ -3,7 +3,7 @@ import React from 'react';
 const UserProfile = () => {
   return (
     <div className="container rounded bg-white mt-5 mb-5">
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-md-3 border-right">
           <div className="d-flex flex-column align-items-center text-center p-3 py-5">
             <img

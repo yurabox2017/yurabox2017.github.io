@@ -13,8 +13,8 @@ export const HeaderOrigin: FC = () => {
 
   return (
     <header>
-      <nav className={`${cn('navbar navbar-expand-sm justify-content-center fixed-top ß', `bg-${theme.theme}`)}`}>
-        <ul className="navbar-nav">
+      <nav className={`${cn('navbar navbar-expand-sm justify-content-center fixed-top px-3 ', `bg-${theme.theme}`)}`}>
+        <ul className="navbar-nav ms-auto">
           <li className="nav-item align-self-center">
             <NavLink className="nav-link" to="/">
               Главная
@@ -26,11 +26,6 @@ export const HeaderOrigin: FC = () => {
             </NavLink>
           </li>
           <li className="nav-item align-self-center">
-            <a className="nav-link" href="#">
-              <Logo />
-            </a>
-          </li>
-          <li className="nav-item align-self-center">
             <NavLink className="nav-link" to="/trash">
               Корзина
             </NavLink>
@@ -40,58 +35,30 @@ export const HeaderOrigin: FC = () => {
               Профиль
             </NavLink>
           </li>
+        </ul>
+        <div className="mx-auto align-self-center">
+          <NavLink className="nav-link" to="/">
+            <Logo />
+          </NavLink>
+        </div>
+        <ul className="navbar-nav ms-auto">
+          <li className="nav-item align-self-center">
+            <NavLink className="nav-link" to="/listProduct/add">
+              Добавить товар
+            </NavLink>
+          </li>
+          <li className="nav-item align-self-center">
+            <NavLink className="nav-link" to="/listProduct/edit">
+              Редактировать товар
+            </NavLink>
+          </li>
+
           <li className="nav-item align-self-center">
             <ChangeThemeButton />
             <LangSwitcher />
           </li>
         </ul>
       </nav>
-
-      {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarText"
-            aria-controls="navbarText"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  <Logo />
-                </NavLink>
-              </li>
-              <li></li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/trash">
-                  Корзина
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/userProfile">
-                  Профиль
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
-      {/* <div className="row  border-mute border-bottom py-1 mx-0 sticky-top">
-        <div className="col text-center offset-4">
-          <Logo />
-        </div>
-        <div className="col align-self-center">
-          <ChangeThemeButton />
-          <LangSwitcher />
-          <NavLink to="/userProfile">Профиль</NavLink>
-        </div>
-      </div> */}
     </header>
   );
 };
