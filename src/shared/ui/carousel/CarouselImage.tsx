@@ -7,10 +7,11 @@ interface IImageCarousel {
   active: string;
 }
 
-export const CarouselImage: FC<IImageCarousel> = memo((image) => {
+const CarouselImage = memo(function (image: IImageCarousel) {
   return (
     <div className={cn('carousel-item ', { active: image.active })}>
       <img src={image.image} className="d-block w-100" alt="..." />
     </div>
   );
 });
+export default CarouselImage;

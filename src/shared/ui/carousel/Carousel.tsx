@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { CarouselImage } from './CarouselImage';
+import CarouselImage from './CarouselImage';
 
 export const Carousel: FC<{ images: string[] }> = ({ images }) => {
   const [index, setIndex] = useState<number>(0);
