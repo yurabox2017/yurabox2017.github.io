@@ -14,4 +14,5 @@ const CarouselImage = memo(function (image: IImageCarousel) {
     </div>
   );
 });
+CarouselImage.displayName = 'CarouselImage';
 export default CarouselImage;
