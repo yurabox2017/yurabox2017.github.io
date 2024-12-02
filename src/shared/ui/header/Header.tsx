@@ -2,11 +2,11 @@ import React, { FC, useContext, useEffect } from 'react';
 import { withTranslation } from 'react-i18next';
 import Logo from '../logo/Logo';
 import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
-import { ChangeThemeButton } from '../changeThemeButton';
-import UserProfile from '../profile/UserProfile';
+
 import { NavLink } from 'react-router';
 import { ThemeContext } from 'src/context/themeContext';
 import { clsx as cn } from 'clsx';
+import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
 
 export const HeaderOrigin: FC = () => {
   const theme = useContext(ThemeContext);

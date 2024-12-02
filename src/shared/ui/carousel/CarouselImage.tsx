@@ -1,16 +1,16 @@
 import React, { FC, memo } from 'react';
 import { clsx as cn } from 'clsx';
 
-interface ICarouselImage {
+interface IImageCarousel {
   index: number;
   image: string;
   active: string;
 }
 
-const CarouselImage: FC<ICarouselImage> = memo((carouseImage) => {
+const CarouselImage: FC<IImageCarousel> = memo((image) => {
   return (
-    <div className={cn('carousel-item ', { active: carouseImage.active })}>
-      <img src={carouseImage.image} className="d-block w-100" alt="..." />
+    <div className={cn('carousel-item ', { active: image.active })}>
+      <img src={image.image} className="d-block w-100" alt="..." />
     </div>
   );
 });
