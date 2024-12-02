@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import CarouselImage from './CarouselImage';
+import { CarouselImage } from './CarouselImage';
 
 export const Carousel: FC<{ images: string[] }> = ({ images }) => {
   const [index, setIndex] = useState<number>(0);
@@ -19,7 +19,7 @@ export const Carousel: FC<{ images: string[] }> = ({ images }) => {
   };
 
   return (
-    <div className='w-50 container'>
+    <div className="w-50 container">
       <div id="carouselExample" className="carousel slide carousel-dark ">
         <div className="carousel-inner">
           {images.map((img: string, i: number) => (
