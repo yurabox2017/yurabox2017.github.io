@@ -6,7 +6,7 @@ import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
 import { NavLink } from 'react-router';
 import { ThemeContext } from 'src/context/themeContext';
 import { clsx as cn } from 'clsx';
-import { ChangeThemeButton } from '../СhangeThemeButton/ChangeThemeButton';
+import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
 
 export const HeaderOrigin: FC = () => {
   const theme = useContext(ThemeContext);

@@ -35,8 +35,6 @@ const ListProductPage = () => {
     }
   }, [addProduct, inView]);
 
-
-
   return (
     <>
       <div className="row row-cols-1 gap-3 justify-content-center">

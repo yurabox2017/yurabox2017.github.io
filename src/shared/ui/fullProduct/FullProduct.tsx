@@ -3,7 +3,6 @@ import { TrashButton } from '../trashButton';
 import IFullProduct from 'src/entities/interfaces/IFullProduct';
 
 export const FullProduct = memo(function FullProduct({ price, images, category, title, description }: IFullProduct) {
-
   return (
     <div className="card text-center" style={{ width: '300px' }}>
       {images?.map((image, i) => (

@@ -1,10 +1,8 @@
-import React from "react";
-import "./Layout.css"
-import { Header } from "../headers/Header";
+import React from 'react';
+import './Layout.css';
+import { Header } from '../headers/Header';
 
 function Layout() {
-    return (
-        <Header />
-    )
+  return <Header />;
 }
 export default Layout;

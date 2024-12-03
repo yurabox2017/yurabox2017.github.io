@@ -1,3 +1,3 @@
 export default interface nITrashButton {
-    counter: number
+  counter: number;
 }

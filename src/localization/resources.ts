@@ -27,7 +27,7 @@ export const resources = {
           'The alias must be at least 7 characters and can contain only numbers, letters and an underscore',
       },
       customText: {
-        desc: "An import substitution company needs to rewrite a project from Blazor to React."
+        desc: 'An import substitution company needs to rewrite a project from Blazor to React.',
       },
       screens: {
         ProfileScreen: {
@@ -206,7 +206,7 @@ export const resources = {
           'Псевдоним должен быть от 7 символов и может содержать только числа, буквы и символ нижнего подчеркивания',
       },
       customText: {
-        desc: "An import substitution company needs to rewrite a project from Blazor to React."
+        desc: 'An import substitution company needs to rewrite a project from Blazor to React.',
       },
       screens: {
         ProfileScreen: {

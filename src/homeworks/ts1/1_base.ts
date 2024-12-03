@@ -18,7 +18,7 @@ export const round = (value: number, accuracy = 2): number => {
 const transformRegexp =
   /(matrix\(-?\d+(\.\d+)?, -?\d+(\.\d+)?, -?\d+(\.\d+)?, -?\d+(\.\d+)?, )(-?\d+(\.\d+)?), (-?\d+(\.\d+)?)\)/;
 
-type coordinate = { x: number, y: number };
+type coordinate = { x: number; y: number };
 export const getTransformFromCss = (transformCssString: string): coordinate => {
   const data = transformCssString.match(transformRegexp);
   if (!data) return { x: 0, y: 0 };
@@ -55,18 +55,19 @@ export const hex2rgb = (color: string): [number, number, number] => {
   return [red, green, blue];
 };
 
-export const getNumberedArray = <T>(arr: [T]): { value: T, number: number }[] => arr.map((value, number) => ({ value, number }));
-export const toStringArray = <T>(arr: [{ value: T, number: number }]) => arr.map(({ value, number }) => `${value}_${number}`);
-
+export const getNumberedArray = <T>(arr: [T]): { value: T; number: number }[] =>
+  arr.map((value, number) => ({ value, number }));
+export const toStringArray = <T>(arr: [{ value: T; number: number }]) =>
+  arr.map(({ value, number }) => `${value}_${number}`);
 
 type Key = {
   id: number;
-}
+};
 type Customer = {
-  name: string,
-  age: number,
-  isSubscribed: boolean
-}
+  name: string;
+  age: number;
+  isSubscribed: boolean;
+};
 type CustomerKey = Key & Customer;
 
 export const transformCustomers = (customers: CustomerKey[]) => {

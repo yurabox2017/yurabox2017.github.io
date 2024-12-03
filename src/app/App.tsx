@@ -16,7 +16,7 @@ import Error from 'src/pages/error/Error';
 import Main from 'src/widgets/main/Main';
 
 function App() {
-  let [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('light');
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));

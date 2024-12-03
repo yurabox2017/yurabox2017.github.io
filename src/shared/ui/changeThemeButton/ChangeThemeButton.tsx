@@ -11,4 +11,3 @@ export const ChangeThemeButton: FC = () => {
     </a>
   );
 };
-

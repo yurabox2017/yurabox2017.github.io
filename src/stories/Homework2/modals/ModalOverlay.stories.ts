@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ModalOverlay from './ModalOverlay';
 
-
 const meta: Meta<typeof ModalOverlay> = {
-    title: 'Homework2/ModalOverlay',
-    component: ModalOverlay,
-    tags: ['autodocs'],
-    parameters: {
-        layout: 'fullscreen',
-    },
+  title: 'Homework2/ModalOverlay',
+  component: ModalOverlay,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export default meta;

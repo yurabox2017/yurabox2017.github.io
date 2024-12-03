@@ -1,1 +1,1 @@
-export * from './TrashButton'; 
+export * from './TrashButton';

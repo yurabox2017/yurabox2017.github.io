@@ -8,7 +8,7 @@ function ChangeLangComponent() {
   return (
     <>
       <I18nextProvider i18n={i18n} defaultNS={'translation'}>
-        <div className='vstack w-25'>
+        <div className="vstack w-25">
           <span>{t(`teststorybook`)}</span>
           <button className="btn btn-primary" onClick={() => i18n.changeLanguage(lang)}>
             {lang}

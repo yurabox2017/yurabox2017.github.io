@@ -1,5 +1,4 @@
-import { FC } from 'react';
-import React from 'react';
+import React, { FC } from 'react';
 import s from './Collapse.module.sass';
 import cn from 'clsx';
 

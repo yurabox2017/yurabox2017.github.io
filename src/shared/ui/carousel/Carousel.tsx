@@ -1,12 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import CarouselImage from './CarouselImage';
 
 export const Carousel: FC<{ images: string[] }> = ({ images }) => {
   const [index, setIndex] = useState<number>(0);
-
-  useEffect(() => {
-    console.log(index);
-  }, [index]);
 
   const handlePrev = () => {
     if (index === 0) setIndex(images.length - 1);
@@ -23,7 +19,7 @@ export const Carousel: FC<{ images: string[] }> = ({ images }) => {
       <div id="carouselExample" className="carousel slide carousel-dark ">
         <div className="carousel-inner">
           {images.map((img: string, i: number) => (
-            <CarouselImage key={i} image={img} index={index} active={index === i ? 'active' : null} />
+            <CarouselImage key={i} image={img} active={index === i ? 'active' : null} />
           ))}
         </div>
         <button

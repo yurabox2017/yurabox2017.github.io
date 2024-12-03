@@ -6,7 +6,6 @@ const meta: Meta<typeof Carousel> = {
   title: 'Homework2/Carousel',
   component: Carousel,
   tags: ['autodocs'],
-  
 };
 
 export default meta;
@@ -16,7 +15,11 @@ export const DefaultCarousel: Story = {
   args: {
     //  openModal: action('clicked'),
     // handleNext: action('clicked'),
-    images: ['/free-icon-cleaning-9012135.png', '/free-icon-cleaning-9717764.png','/yoga-mat-cleaning-kit.png','/cleaner.png'],
+    images: [
+      '/free-icon-cleaning-9012135.png',
+      '/free-icon-cleaning-9717764.png',
+      '/yoga-mat-cleaning-kit.png',
+      '/cleaner.png',
+    ],
   },
-
 };
