@@ -84,7 +84,7 @@ export type Profit = {
  * Принимает дату создания (строка)
  * */
 export const createRandomProduct = (createdAt: string): Product => ({
-  id: faker.number.int(),
+  id: faker.number.int({ max: 5 }),
   name: faker.commerce.product(),
   photo: faker.image.avatar(),
   desc: faker.commerce.productDescription(),

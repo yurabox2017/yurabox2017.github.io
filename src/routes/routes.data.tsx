@@ -40,7 +40,7 @@ export const routes = createBrowserRouter([
       {
         path: '/listProduct/edit',
         element: (
-          <ProtectedRouteAdmin role="Admin">
+          <ProtectedRouteAdmin>
             <EditProductModal />
           </ProtectedRouteAdmin>
         ),
@@ -48,7 +48,7 @@ export const routes = createBrowserRouter([
       {
         path: '/listProduct/add',
         element: (
-          <ProtectedRouteAdmin role="Admin">
+          <ProtectedRouteAdmin>
             <AddProductModal />
           </ProtectedRouteAdmin>
         ),

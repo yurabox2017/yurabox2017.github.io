@@ -4,5 +4,5 @@ export interface IUserProfile {
   lastName: string;
   firstName: string;
   phone: string;
-  role: string;
+  isAdmin: boolean;
 }

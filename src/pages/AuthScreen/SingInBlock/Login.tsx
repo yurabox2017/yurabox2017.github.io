@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispath, RootState } from 'src/features/store/store';
-import { userActions } from 'src/features/store/user.slice';
+import { IUserState, userActions } from 'src/features/store/user.slice';
 import { useNavigate } from 'react-router';
 import { IUserProfile } from 'src/entities/interfaces/IUserProfile';
 
@@ -27,26 +27,25 @@ function Login() {
   const dispatch = useDispatch<AppDispath>();
   const navigate = useNavigate();
   const jwt = useSelector((s: RootState) => s.user.userData?.jwt);
-
-  const profile: IUserProfile = {
+  const [checked, setChecked] = React.useState(false);
+  let profile: IUserProfile = {
     id: 123,
     lastName: 'Ivanov',
     firstName: 'Ivan',
     phone: '89260010101',
     email: 'test@mail.ru',
-    role: 'Admin',
+    isAdmin: false,
   };
 
-  useEffect(() => {
-    if (jwt) {
-      dispatch(userActions.addProfile(profile));
-      navigate('/');
-    }
-  }, [jwt, navigate]);
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   const onSubmit: SubmitHandler<IFormLogin> = (data) => {
     const jwt = Math.random().toString(16);
-    dispatch(userActions.addJwt(jwt));
+    const user: IUserState = { jwt: jwt, profile: { ...profile, email: data.email, isAdmin: checked } };
+    dispatch(userActions.addProfile(user));
+    navigate('/');
   };
 
   const passwordError = (
@@ -59,7 +58,7 @@ function Login() {
   );
 
   return (
-    <form className="container w-50 needs-validation" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className="container w-50 needs-validation vstack" onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="mb-3">
         <label className="form-label">Email</label>
         <input
@@ -85,6 +84,12 @@ function Login() {
           required
         />
         <div className="invalid-feedback"> {errors.password && passwordError}</div>
+      </div>
+      <div className="btn-group mb-3 w-25 mx-auto text-center" role="group">
+        <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
+        <label className="btn btn-outline-primary" htmlFor="btncheck1">
+          Админ
+        </label>
       </div>
       <button type="submit" className="btn btn-primary">
         Войти

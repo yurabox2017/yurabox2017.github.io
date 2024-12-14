@@ -11,6 +11,7 @@ export interface IUserState {
 
 const initialState: IUserState = {
   jwt: loadState<IUserState>(JWT_PERSISTENT_STATE)?.jwt ?? null,
+  profile: loadState<IUserState>(JWT_PERSISTENT_STATE)?.profile ?? null,
 };
 
 const userSlice = createSlice({
@@ -20,8 +21,9 @@ const userSlice = createSlice({
     addJwt: (state, action: PayloadAction<string>) => {
       state.jwt = action.payload;
     },
-    addProfile: (state, action: PayloadAction<IUserProfile>) => {
-      state.profile = action.payload;
+    addProfile: (state, action: PayloadAction<IUserState>) => {
+      state.jwt = action.payload.jwt;
+      state.profile = action.payload.profile;
     },
     logout: (state) => {
       state.jwt = null;

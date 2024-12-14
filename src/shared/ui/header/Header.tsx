@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import Logo from '../logo/Logo';
 import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
 
-import { Link, NavLink, useNavigate } from 'react-router';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { ThemeContext } from 'src/context/themeContext';
 import { clsx as cn } from 'clsx';
 import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
@@ -19,7 +19,7 @@ export const HeaderOrigin: FC = () => {
     dispatch(userActions.logout());
     navigate('/login');
   };
-
+  const location = useLocation();
   return (
     <header>
       <nav className={`${cn('navbar navbar-expand-sm justify-content-center fixed-top px-3 ')}`}>
@@ -52,12 +52,12 @@ export const HeaderOrigin: FC = () => {
         </div>
         <ul className="navbar-nav ms-auto">
           <li className="nav-item align-self-center">
-            <Link className="nav-link" to="/listProduct/add">
+            <NavLink className="nav-link" to="/listProduct/add" state={{ previousLocation: location }}>
               Добавить товар
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item align-self-center">
-            <NavLink className="nav-link " to="/listProduct/edit">
+            <NavLink className="nav-link " to="/listProduct/edit" state={{ previousLocation: location }}>
               Редактировать товар
             </NavLink>
           </li>
@@ -69,7 +69,7 @@ export const HeaderOrigin: FC = () => {
             <LangSwitcher />
           </li>
           <li className="nav-item alig-self-center">
-            <Link to="#" className="nav-link" onClick={logout}>
+            <Link to="/login" className="nav-link" onClick={logout}>
               Выход
             </Link>
           </li>

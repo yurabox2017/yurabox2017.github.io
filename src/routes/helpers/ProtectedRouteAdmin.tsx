@@ -5,15 +5,13 @@ import { RootState } from 'src/features/store/store';
 
 interface IProtectedRouteAdmin {
   children: React.ReactElement;
-  role: string;
 }
 
-export const ProtectedRouteAdmin = ({ role, children }: IProtectedRouteAdmin) => {
+export const ProtectedRouteAdmin = ({ children }: IProtectedRouteAdmin) => {
   const user = useSelector((s: RootState) => s.user);
 
   if (!user.userData?.jwt) return <Navigate to="/login" />;
-
-  if (user.userData?.profile?.role !== role) return <Navigate to="/login" />;
+  if (!user.userData?.profile?.isAdmin) return <Navigate to="/login" />;
 
   return children;
 };

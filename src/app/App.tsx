@@ -4,9 +4,7 @@ import { Theme, ThemeContext } from 'src/context/themeContext';
 import { LocalizationInitiator } from 'src/localization/LocalizationInitiator';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'src/localization/settings';
-import { BrowserRouter, Route, RouterProvider, Routes, useLocation } from 'react-router';
-import { routes } from 'src/routes/routes.data';
-import { EditProductModal } from 'src/shared/ui/modals/modal/EditProductModal';
+import { CustomRoutes } from 'src/routes/routes';
 
 function App() {
   const [theme, setTheme] = useState<Theme>(() => 'light');
@@ -31,7 +29,8 @@ function App() {
       <I18nextProvider i18n={i18n} defaultNS={'translation'}>
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div className={`App border border-bottom-dark`}>
-            <RouterProvider router={routes} />
+            <CustomRoutes />
+            {/* <RouterProvider router={routes} /> */}
           </div>
         </ThemeContext.Provider>
       </I18nextProvider>
