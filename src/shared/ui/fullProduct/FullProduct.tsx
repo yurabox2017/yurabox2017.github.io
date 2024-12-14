@@ -1,8 +1,12 @@
 import React, { FC, memo, useState } from 'react';
-import { TrashButton } from '../trashButton';
+import { CartButton } from '../cartButton';
 import IFullProduct from 'src/entities/interfaces/IFullProduct';
+import { useDispatch } from 'react-redux';
+import { AppDispath } from 'src/features/store/store';
+import { cartActions } from 'src/features/store/cart.slice';
 
 export const FullProduct = memo(function FullProduct({ price, images, category, title, description }: IFullProduct) {
+
   return (
     <div className="card text-center" style={{ width: '300px' }}>
       {images?.map((image, i) => (
@@ -14,7 +18,7 @@ export const FullProduct = memo(function FullProduct({ price, images, category, 
         <h6 className="card-subtitle mb-2 text-muted">{category}</h6>
         <p className="card-text">{description}</p>
         <p className="card-text">цена: {price}р</p>
-        <TrashButton counter={0} />
+        {/* <TrashButton counter={0}  /> */}
       </div>
     </div>
   );

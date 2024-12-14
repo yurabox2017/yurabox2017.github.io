@@ -53,6 +53,18 @@ const FormProduct = () => {
           required
         />
       </div>
+      <div className="mb-3">
+        <label className="form-label">Price</label>
+        <input
+          type="number"
+          className={cn(['form-control', errors.price && 'is-invalid'])}
+          {...register('price', {
+            required: true,
+            minLength: 3,
+          })}
+          required
+        />
+      </div>
       <button type="submit" className="btn btn-primary">
         Submit
       </button>

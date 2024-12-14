@@ -1,8 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/features/store/store';
 
 const UserProfile = () => {
+  const profile = useSelector((s: RootState) => s.user.userData);
+
   return (
-    <div className="container rounded bg-white mt-5 mb-5">
+    <div className="container rounded mt-5 mb-5">
       <div className="row justify-content-center">
         <div className="col-md-3 border-right">
           <div className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -24,21 +28,21 @@ const UserProfile = () => {
             <div className="row mt-2">
               <div className="col-md-6">
                 <label className="labels">Имя</label>
-                <input type="text" className="form-control" placeholder="Имя" value="" />
+                <input type="text" className="form-control" placeholder="Имя" defaultValue={profile.profile?.firstName} />
               </div>
               <div className="col-md-6">
                 <label className="labels">Фамилия</label>
-                <input type="text" className="form-control" value="" placeholder="Фамилия" />
+                <input type="text" className="form-control" defaultValue={profile.profile?.lastName} placeholder="Фамилия" />
               </div>
             </div>
             <div className="row mt-3">
               <div className="col-md-12">
                 <label className="labels">Мобильный телефон</label>
-                <input type="text" className="form-control" placeholder="введите телефон" value="" />
+                <input type="text" className="form-control" placeholder="введите телефон" defaultValue={profile.profile?.phone} />
               </div>
               <div className="col-md-12">
                 <label className="labels">Email</label>
-                <input type="text" className="form-control" placeholder="введите email" value="" />
+                <input type="text" className="form-control" placeholder="введите email" defaultValue={profile.profile?.email} />
               </div>
             </div>
             <div className="mt-5 text-center">

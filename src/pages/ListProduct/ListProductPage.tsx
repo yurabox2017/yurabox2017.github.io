@@ -4,30 +4,31 @@ import { useInView } from 'react-intersection-observer';
 import { createRandomProduct } from 'src/homeworks/ts1/3_write';
 import Modal from 'src/stories/Homework2/modals/Modal';
 import FormProduct from 'src/shared/ui/formProduct/FormProduct';
+import IShortProduct from 'src/entities/interfaces/IShortProduct';
 
 const ListProductPage = () => {
   const { ref, inView } = useInView({ threshold: 0.7 });
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IShortProduct[]>([]);
 
   function addProduct() {
     const createdAt = '2023-06-06T12:06:56.957Z';
     const product = createRandomProduct(createdAt);
-
     setProducts([
       ...products,
       {
+        id: product.id,
         price: product.price,
-        category: product.category.name,
+        // category: product.category.name,
         title: product.name,
         description: product.desc,
-        images: [product.photo],
+        image: product.photo,
       },
     ]);
   }
 
-  useEffect(() => {
-    addProduct();
-  }, []);
+  // useEffect(() => {
+  //   addProduct();
+  // }, []);
 
   useEffect(() => {
     if (inView) {

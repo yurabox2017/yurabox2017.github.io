@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TrashButton } from './TrashButton';
+import { CartButton } from './CartButton';
 
-const meta: Meta<typeof TrashButton> = {
-  title: 'Homework2/TrashButton',
-  component: TrashButton,
+const meta: Meta<typeof CartButton> = {
+  title: 'Homework2/CartButton',
+  component: CartButton,
   tags: ['autodocs'],
 };
 

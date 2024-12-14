@@ -7,7 +7,8 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="" style={{ marginTop: '70px' }}>
+      <div className="" style={{ marginTop: '55px' }}>
+        <hr className="mt-0" />
         <Outlet />
       </div>
     </>

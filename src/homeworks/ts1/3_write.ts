@@ -85,9 +85,9 @@ export type Profit = {
  * */
 export const createRandomProduct = (createdAt: string): Product => ({
   id: faker.number.int(),
-  name: faker.commerce.product.name,
+  name: faker.commerce.product(),
   photo: faker.image.avatar(),
-  desc: 'desc',
+  desc: faker.commerce.productDescription(),
   createdAt: createdAt,
   oldPrice: +faker.commerce.price({ min: 1000, max: 5000 }),
   price: +faker.commerce.price({ min: 1000, max: 5000 }),

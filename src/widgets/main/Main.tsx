@@ -28,9 +28,9 @@ export default function Main() {
     ]);
   }
 
-  useEffect(() => {
-    addProduct();
-  }, []);
+  // useEffect(() => {
+  //   addProduct();
+  // }, []);
 
   useEffect(() => {
     if (inView) {

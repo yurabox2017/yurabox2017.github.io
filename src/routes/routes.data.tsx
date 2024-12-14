@@ -1,12 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from 'src/shared/ui/layouts/Layout';
 import Main from 'src/widgets/main/Main';
-import UserProfile from 'src/shared/ui/profile/UserProfile';
+import UserProfile from 'src/pages/profile/UserProfile';
 import Error from 'src/pages/error/Error';
 import ListProductPage from 'src/pages/ListProduct/ListProductPage';
-import TrashProduct from 'src/shared/ui/trashProduct/TrashProduct';
+import CartProduct from 'src/shared/ui/cartProduct/CartProduct';
 import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
 import { EditProductModal } from 'src/shared/ui/modals/modal/EditProductModal';
+import { RequireAuth } from 'src/routes/helpers/RequireAuth';
+import React from 'react';
+import Login from 'src/pages/AuthScreen/SingInBlock/Login';
+import { ProtectedRouteAdmin } from './helpers/ProtectedRouteAdmin';
 
 export const routes = createBrowserRouter([
   {
@@ -19,11 +23,15 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/userProfile',
-        Component: UserProfile,
+        element: (
+          <RequireAuth>
+            <UserProfile />
+          </RequireAuth>
+        ),
       },
       {
         path: '/trash',
-        Component: TrashProduct,
+        Component: CartProduct,
       },
       {
         path: '/listProduct',
@@ -31,14 +39,23 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/listProduct/edit',
-        Component: EditProductModal,
+        element: (
+          <ProtectedRouteAdmin role="Admin">
+            <EditProductModal />
+          </ProtectedRouteAdmin>
+        ),
       },
       {
         path: '/listProduct/add',
-        Component: AddProductModal,
+        element: (
+          <ProtectedRouteAdmin role="Admin">
+            <AddProductModal />
+          </ProtectedRouteAdmin>
+        ),
       },
     ],
   },
+  { path: '/login', Component: Login },
   {
     path: '*',
     Component: Error,

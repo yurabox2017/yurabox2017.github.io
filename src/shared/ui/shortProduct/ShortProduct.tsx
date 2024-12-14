@@ -1,9 +1,29 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
-import { TrashButton } from '../trashButton';
+import { CartButton } from '../cartButton';
+import { AppDispath } from 'src/features/store/store';
+import { useDispatch } from 'react-redux';
+import { cartActions } from 'src/features/store/cart.slice';
+import { ICartProduct } from 'src/entities/interfaces/ICartProduct';
 
-const ShortProduct = memo(function ShortProduct({ title, price, description, image }: IShortProduct) {
+const ShortProduct = memo(function ShortProduct({ id, title, price, description, image }: IShortProduct) {
+  const product = { id, title, price, description, image } as ICartProduct;
+  const [counter, setCounter] = useState<number>(0);
+  const dispatch = useDispatch<AppDispath>();
+
+  const handleAddProduct = () => {
+    dispatch(cartActions.add(product));
+    setCounter((prev) => prev + 1);
+  };
+  const handleIncrement = () => {
+    setCounter((prev) => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    setCounter((prev) => prev - 1);
+  };
+
   return (
     <div className="card text-center" style={{ width: '300px' }}>
       <img src={image} className="card-img-top" alt="..." style={{ objectFit: 'none' }} />
@@ -11,7 +31,14 @@ const ShortProduct = memo(function ShortProduct({ title, price, description, ima
         <h5 className="card-title">{title}</h5>
         <h6 className="card-subtitle mb-2 text-muted">{price}</h6>
         <p className="card-text">{description}</p>
-        <TrashButton counter={0} />
+      </div>
+      <div className="card-foote1r pb-2">
+        <CartButton
+          counter={counter}
+          addProduct={handleAddProduct}
+          increment={handleIncrement}
+          decrement={handleDecrement}
+        />
       </div>
     </div>
   );

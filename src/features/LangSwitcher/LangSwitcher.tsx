@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import s from './LangSwitcher.sass';
 import { Locale } from 'src/localization/settings';
 import { ThemeContext } from 'src/context/themeContext';
+import { Link } from 'react-router';
 
 export type ThemeSwitcherProps = {
   className?: string;
@@ -16,12 +17,12 @@ export const LangSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
 
   const lang = (i18n.language as Locale) === Locale.ru ? Locale.en : Locale.ru;
   return (
-    <button
-      type="button"
-      className={cn(s.root, className, `text-${theme.theme === 'dark' ? 'light' : 'dark'}`)}
+    <Link
+      to="#"
+      className='nav-link'
       onClick={() => i18n.changeLanguage(lang)}
     >
       {lang}
-    </button>
+    </Link>
   );
 };
