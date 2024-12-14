@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import { ICartProduct } from 'src/entities/interfaces/ICartProduct';
-
+import type {PayloadAction} from "@reduxjs/toolkit"
 export const CART_PERSISTENT_STATE = 'cartData';
 
 export interface ICartState {

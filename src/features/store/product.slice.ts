@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
-
+import type {PayloadAction} from "@reduxjs/toolkit"
 
 export const PRODUCT_PERSISTENT_STATE = 'productData';
 

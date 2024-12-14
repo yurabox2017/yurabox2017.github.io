@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import { IUserProfile } from 'src/entities/interfaces/IUserProfile';
+import type {PayloadAction} from "@reduxjs/toolkit"
 
 export const JWT_PERSISTENT_STATE = 'userData';
 
