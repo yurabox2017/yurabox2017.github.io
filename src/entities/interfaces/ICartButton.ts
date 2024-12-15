@@ -1,6 +1,8 @@
+import { ICartProduct } from './ICartProduct';
+
 export default interface ICartButton {
-  counter: number;
-  addProduct: () => void;
-  increment: () => void;
-  decrement: () => void;
+  product: ICartProduct;
+  // addProduct: () => void;
+  // increment: () => void;
+  // decrement: () => void;
 }

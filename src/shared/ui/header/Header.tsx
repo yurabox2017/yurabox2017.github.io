@@ -7,13 +7,14 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router';
 import { ThemeContext } from 'src/context/themeContext';
 import { clsx as cn } from 'clsx';
 import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
-import { useDispatch } from 'react-redux';
-import { AppDispath } from 'src/features/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispath, RootState } from 'src/features/store/store';
 import { userActions } from 'src/features/store/user.slice';
+import { productActions } from 'src/features/store/product.slice';
 
 export const HeaderOrigin: FC = () => {
-  const theme = useContext(ThemeContext);
   const dispatch = useDispatch<AppDispath>();
+  const count = useSelector((s: RootState) => s.user.cartData.items.length);
   const navigate = useNavigate();
   const logout = () => {
     dispatch(userActions.logout());
@@ -35,8 +36,8 @@ export const HeaderOrigin: FC = () => {
             </NavLink>
           </li>
           <li className="nav-item align-self-center">
-            <NavLink className="nav-link" to="/trash">
-              Корзина
+            <NavLink className="nav-link position-relative" to="/trash">
+              Корзина <span className="badge text-bg-light">{count === 0 ? null : count}</span>
             </NavLink>
           </li>
           <li className="nav-item align-self-center">

@@ -9,20 +9,6 @@ import { ICartProduct } from 'src/entities/interfaces/ICartProduct';
 
 const ShortProduct = memo(function ShortProduct({ id, title, price, description, image }: IShortProduct) {
   const product = { id, title, price, description, image } as ICartProduct;
-  const [counter, setCounter] = useState<number>(0);
-  const dispatch = useDispatch<AppDispath>();
-
-  const handleAddProduct = () => {
-    dispatch(cartActions.add(product));
-    setCounter((prev) => prev + 1);
-  };
-  const handleIncrement = () => {
-    setCounter((prev) => prev + 1);
-  };
-
-  const handleDecrement = () => {
-    setCounter((prev) => prev - 1);
-  };
 
   return (
     <div className="card text-center" style={{ width: '300px' }}>
@@ -33,12 +19,7 @@ const ShortProduct = memo(function ShortProduct({ id, title, price, description,
         <p className="card-text">{description}</p>
       </div>
       <div className="card-foote1r pb-2">
-        <CartButton
-          counter={counter}
-          addProduct={handleAddProduct}
-          increment={handleIncrement}
-          decrement={handleDecrement}
-        />
+        <CartButton product={product} />
       </div>
     </div>
   );

@@ -10,14 +10,14 @@ const meta: Meta<typeof CartButton> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CounterZero: Story = {
-  args: {
-    counter: 0,
-  },
-};
+// export const CounterZero: Story = {
+//   args: {
+//     counter: 0,
+//   },
+// };
 
-export const CounterMoreZero: Story = {
-  args: {
-    counter: 1,
-  },
-};
+// export const CounterMoreZero: Story = {
+//   args: {
+//     counter: 1,
+//   },
+// };
