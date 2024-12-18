@@ -20,7 +20,6 @@ const FormProduct = () => {
   const dispatch = useDispatch<AppDispath>();
 
   const onSubmit: SubmitHandler<IShortProduct> = (data) => {
-    console.log(data)
     if (!data.id) data = { ...data, id: faker.number.int() };
     dispatch(productActions.add(data));
     reset();
