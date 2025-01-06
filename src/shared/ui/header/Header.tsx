@@ -9,17 +9,18 @@ import { clsx as cn } from 'clsx';
 import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispath, RootState } from 'src/features/store/store';
-import { userActions } from 'src/features/store/user.slice';
+import { logout } from 'src/features/store/user.slice';
 import { productActions } from 'src/features/store/product.slice';
 
 export const HeaderOrigin: FC = () => {
   const dispatch = useDispatch<AppDispath>();
-  const count = useSelector((s: RootState) => s.user.cartData.items.length);
+  const count = useSelector((s: RootState) => s.user.cartData?.items.length);
   const navigate = useNavigate();
-  const logout = () => {
-    dispatch(userActions.logout());
-    navigate('/login');
-  };
+
+  // const logout = () => {
+  //   dispatch(logout);
+  //   navigate('/login');
+  // };
   const location = useLocation();
   return (
     <header>
@@ -70,7 +71,7 @@ export const HeaderOrigin: FC = () => {
             <LangSwitcher />
           </li>
           <li className="nav-item alig-self-center">
-            <Link to="/login" className="nav-link" onClick={logout}>
+            <Link to="/login" className="nav-link" onClick={() => logout()}>
               Выход
             </Link>
           </li>

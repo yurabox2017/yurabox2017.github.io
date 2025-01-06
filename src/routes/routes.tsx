@@ -13,6 +13,7 @@ import CartProduct from 'src/shared/ui/cartProduct/CartProduct';
 import Error from 'src/pages/error/Error';
 import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
 import Login from 'src/pages/AuthScreen/SingInBlock/Login';
+import { Register } from 'src/pages/AuthScreen/SingUpBlock/Register';
 
 export const CustomRoutes = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ export const CustomRoutes = () => {
      
         </Route>
         <Route path='/login' Component={Login}></Route>
+        <Route path='/register' Component={Register}></Route>
       </Routes>
       {previousLocation && (
         <Routes>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import { IUserProfile } from 'src/entities/interfaces/IUserProfile';
-import type {PayloadAction} from "@reduxjs/toolkit"
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export const JWT_PERSISTENT_STATE = 'userData';
 
@@ -34,4 +34,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const userActions = userSlice.actions;
+export const { addJwt, addProfile, logout } = userSlice.actions;

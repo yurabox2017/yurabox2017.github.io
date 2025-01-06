@@ -5,6 +5,8 @@ import cartSlice from './cart.slice';
 import productSlice from './product.slice';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
+import { newUserApi } from 'src/services/api/newUserApi.slice';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
   key: 'root',
@@ -19,19 +21,20 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: {
     user: persistedReducer,
+    [newUserApi.reducerPath]: newUserApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
-    }),
+    }).concat(newUserApi.middleware),
 });
 
 // store.subscribe(() => {
 //   saveState({ userData: store.getState().user }, JWT_PERSISTENT_STATE);
 // });
-
+setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;
 export const persistor = persistStore(store);
