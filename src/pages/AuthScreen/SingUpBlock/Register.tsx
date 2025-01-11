@@ -33,10 +33,11 @@ export const Register = () => {
   useEffect(() => {
     if (status === 'failed') alert(errorState.message);
     else if (status === 'succeeded') {
-      //очистить статус чтобы не попасть сюда при переходе на страницу регистрации
-      dispatch(clearRegister());
       navigate('/login');
     }
+    return () => {
+      dispatch(clearRegister());
+    };
   }, [status]);
 
   const onSubmitRtk: SubmitHandler<SignUpBody> = async (data) => {
