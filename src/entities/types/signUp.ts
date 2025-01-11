@@ -3,7 +3,3 @@ export type SignUpBody = {
   password: string;
   commandId: string;
 };
-
-export type AuthResult = {
-  token: string;
-};
