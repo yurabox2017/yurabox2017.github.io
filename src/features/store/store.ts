@@ -1,11 +1,11 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { AnyAction, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import userSlice, { JWT_PERSISTENT_STATE } from './user.slice';
+import userSlice from './user.slice';
 import cartSlice from './cart.slice';
 import productSlice from './product.slice';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
-import { newUserApi } from 'src/services/api/newUserApi.slice';
+import { authApi } from 'src/services/api/authApi.slice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
@@ -20,15 +20,16 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
-    [newUserApi.reducerPath]: newUserApi.reducer,
+    user: rootReducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-      },
-    }).concat(newUserApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: {
+  //       ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+  //     },
+  //   }).concat(authApi.middleware),
 });
 
 // store.subscribe(() => {
@@ -37,4 +38,6 @@ export const store = configureStore({
 setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
+export type ExtraParams = { url: string; version: string };
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, ExtraParams, AnyAction>;
