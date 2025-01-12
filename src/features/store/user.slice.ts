@@ -3,7 +3,7 @@ import { loadState } from './storage';
 import { IUserProfile } from 'src/entities/interfaces/IUserProfile';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { SignUpBody } from 'src/entities/types/signUp';
-import { PREFIX } from 'src/services/api/API';
+import { ExtraParams, RootState } from './store';
 
 export const JWT_PERSISTENT_STATE = 'userData';
 
@@ -19,6 +19,24 @@ const initialState: IUserState = {
   profile: loadState<IUserState>(JWT_PERSISTENT_STATE)?.profile ?? null,
   status: 'idle',
 };
+
+export const registerThunk = createAsyncThunk('user/signUp', async (params: SignUpBody, thunkApi) => {
+  try {
+    const response = await fetch(`${(thunkApi.extra as ExtraParams).url}signUp`, {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify(params),
+    });
+
+    if (!response.ok) {
+      let errBody = await response.json();
+      return Promise.reject(errBody.errors[0]);
+    }
+    return await response.json();
+  } catch (e) {
+    throw new Error(e);
+  }
+});
 
 const userSlice = createSlice({
   name: 'user',
@@ -46,9 +64,6 @@ const userSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(registerThunk.fulfilled, (state, action) => {
-        if (!action.payload) {
-          return;
-        }
         state.status = 'succeeded';
         state.jwt = action.payload.token;
       })
@@ -60,19 +75,8 @@ const userSlice = createSlice({
   },
 });
 
-export const registerThunk = createAsyncThunk('user/register', async (params: SignUpBody) => {
-  const response = await fetch(`${PREFIX}/signup`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
-    body: JSON.stringify(params),
-  });
-
-  if (!response.ok) {
-    let errBody = await response.json();
-    return Promise.reject(errBody.errors[0]);
-  }
-  return await response.json();
-});
-
+export const userSelectors = {
+  get: (state: IUserState) => state,
+};
 export default userSlice.reducer;
 export const { addJwt, login, logout, clearRegister } = userSlice.actions;

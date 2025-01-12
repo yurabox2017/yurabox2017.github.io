@@ -8,10 +8,10 @@ interface IProtectedRouteAdmin {
 }
 
 export const ProtectedRouteAdmin = ({ children }: IProtectedRouteAdmin) => {
-  const user = useSelector((s: RootState) => s.user);
+  const { user } = useSelector((s: RootState) => s.rootReducer);
 
-  const isAuthenticated = user.userData?.jwt;
-  const isAdmin = user.userData?.profile?.isAdmin;
+  const isAuthenticated = user?.jwt;
+  const isAdmin = user?.profile?.isAdmin;
 
   if (!isAuthenticated || !isAdmin) {
     return <Navigate to="/login" />;
@@ -19,4 +19,3 @@ export const ProtectedRouteAdmin = ({ children }: IProtectedRouteAdmin) => {
 
   return children;
 };
-

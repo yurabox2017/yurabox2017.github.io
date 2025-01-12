@@ -4,7 +4,7 @@ import { cartActions } from 'src/features/store/cart.slice';
 import { AppDispath, RootState } from 'src/features/store/store';
 
 const CartProduct = () => {
-  const products = useSelector((s: RootState) => s.user.cartData.items);
+  const products = useSelector((s: RootState) => s.rootReducer.cart.items);
   const dispatch = useDispatch<AppDispath>();
 
   return (

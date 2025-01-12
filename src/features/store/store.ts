@@ -9,27 +9,33 @@ import { authApi } from 'src/services/api/authApi.slice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
-  key: 'root',
+  key: 'product',
   storage,
   debug: true,
 };
 
-const rootReducer = combineReducers({ userData: userSlice, cartData: cartSlice, productData: productSlice });
-
+const rootReducer = combineReducers({ user: userSlice, cart: cartSlice, product: productSlice });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const productReducer = combineReducers({ product: productSlice, cart: cartSlice });
+// const persistedReducer = persistReducer(persistConfig, productReducer);
 
 export const store = configureStore({
   reducer: {
-    user: rootReducer,
+    rootReducer: persistedReducer,
     [authApi.reducerPath]: authApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware({
-  //     serializableCheck: {
-  //       ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-  //     },
-  //   }).concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+      thunk: {
+        extraArgument: {
+          url: 'http://19429ba06ff2.vps.myjino.ru/api/',
+          version: '1',
+        },
+      },
+    }).concat(authApi.middleware),
 });
 
 // store.subscribe(() => {
@@ -38,6 +44,6 @@ export const store = configureStore({
 setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 export type ExtraParams = { url: string; version: string };
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, ExtraParams, AnyAction>;

@@ -8,7 +8,7 @@ import { productActions } from 'src/features/store/product.slice';
 const ListProductPage = () => {
   const { ref, inView } = useInView({ threshold: 0.7 });
 
-  const products = useSelector((s: RootState) => s.user.productData.items);
+  const products = useSelector((s: RootState) => s.rootReducer.product.items);
   const dispatch = useDispatch<AppDispath>();
 
 

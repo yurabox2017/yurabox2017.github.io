@@ -12,7 +12,7 @@ import { AppDispath, RootState } from 'src/features/store/store';
 
 export const HeaderOrigin: FC = () => {
   const dispatch = useDispatch<AppDispath>();
-  const count = useSelector((s: RootState) => s.user.cartData?.items.length);
+  const count = useSelector((s: RootState) => s.rootReducer.cart?.items.length);
   const navigate = useNavigate();
 
   const logoutHandler = () => {

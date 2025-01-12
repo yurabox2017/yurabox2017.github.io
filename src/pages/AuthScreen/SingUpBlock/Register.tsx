@@ -15,7 +15,7 @@ export const Register = () => {
   const [signUp, { isLoading, error, isSuccess }] = useSignUpMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispath>();
-  const { status, jwt, errorState } = useSelector((s: RootState) => s.user.userData);
+  const { status, jwt, errorState } = useSelector((s: RootState) => s.rootReducer.user);
 
   const errorMsg = (error: FetchBaseQueryError | SerializedError) => {
     let errMsg: ServerErrors = JSON.parse(JSON.stringify(error));
