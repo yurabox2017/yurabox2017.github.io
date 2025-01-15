@@ -3,18 +3,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
 
 const UserProfile = () => {
-  const profile = useSelector((s: RootState) => s.user.userData);
+  const { profile } = useSelector((s: RootState) => s.rootReducer.user);
 
   return (
     <div className="container rounded mt-5 mb-5">
       <div className="row justify-content-center">
         <div className="col-md-3 border-right">
           <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img
-              className="rounded-circle mt-5"
-              width="150px"
-              src="businessman (1).png"
-            />
+            <img className="rounded-circle mt-5" width="150px" src="businessman (1).png" />
             <span className="font-weight-bold"></span>
             <span className="text-black-50"></span>
             <span> </span>
@@ -28,21 +24,26 @@ const UserProfile = () => {
             <div className="row mt-2">
               <div className="col-md-6">
                 <label className="labels">Имя</label>
-                <input type="text" className="form-control" placeholder="Имя" defaultValue={profile.profile?.firstName} />
+                <input type="text" className="form-control" placeholder="Имя" defaultValue={profile?.firstName} />
               </div>
               <div className="col-md-6">
                 <label className="labels">Фамилия</label>
-                <input type="text" className="form-control" defaultValue={profile.profile?.lastName} placeholder="Фамилия" />
+                <input type="text" className="form-control" defaultValue={profile?.lastName} placeholder="Фамилия" />
               </div>
             </div>
             <div className="row mt-3">
               <div className="col-md-12">
                 <label className="labels">Мобильный телефон</label>
-                <input type="text" className="form-control" placeholder="введите телефон" defaultValue={profile.profile?.phone} />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="введите телефон"
+                  defaultValue={profile?.phone}
+                />
               </div>
               <div className="col-md-12">
                 <label className="labels">Email</label>
-                <input type="text" className="form-control" placeholder="введите email" defaultValue={profile.profile?.email} />
+                <input type="text" className="form-control" placeholder="введите email" defaultValue={profile?.email} />
               </div>
             </div>
             <div className="mt-5 text-center">

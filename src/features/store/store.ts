@@ -1,37 +1,49 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { AnyAction, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import userSlice, { JWT_PERSISTENT_STATE } from './user.slice';
+import userSlice from './user.slice';
 import cartSlice from './cart.slice';
 import productSlice from './product.slice';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
+import { authApi } from 'src/services/api/authApi.slice';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
-  key: 'root',
+  key: 'product',
   storage,
   debug: true,
 };
 
-const rootReducer = combineReducers({ userData: userSlice, cartData: cartSlice, productData: productSlice });
-
+const rootReducer = combineReducers({ user: userSlice, cart: cartSlice, product: productSlice });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const productReducer = combineReducers({ product: productSlice, cart: cartSlice });
+// const persistedReducer = persistReducer(persistConfig, productReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    rootReducer: persistedReducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
       },
-    }),
+      thunk: {
+        extraArgument: {
+          url: 'http://19429ba06ff2.vps.myjino.ru/api/',
+          version: '1',
+        },
+      },
+    }).concat(authApi.middleware),
 });
 
 // store.subscribe(() => {
 //   saveState({ userData: store.getState().user }, JWT_PERSISTENT_STATE);
 // });
-
+setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;
 export const persistor = persistStore(store);
+export type ExtraParams = { url: string; version: string };
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, ExtraParams, AnyAction>;

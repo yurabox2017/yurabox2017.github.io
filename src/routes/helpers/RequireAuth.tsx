@@ -8,7 +8,7 @@ interface IProtectedRoute {
 }
 
 export const RequireAuth = ({ children }: IProtectedRoute) => {
-  const jwt = useSelector((s: RootState) => s.user.userData?.jwt);
+  const { jwt } = useSelector((s: RootState) => s.rootReducer?.user);
   if (!jwt) return <Navigate to="/login" />;
 
   return children;
