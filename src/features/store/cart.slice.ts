@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import { ICartProduct } from 'src/entities/interfaces/ICartProduct';
-import type {PayloadAction} from "@reduxjs/toolkit"
-export const CART_PERSISTENT_STATE = 'cartData';
+import type { PayloadAction } from '@reduxjs/toolkit';
+export const CART_PERSISTENT_STATE = 'cart';
 
-export interface ICartState {
-  items: ICartProduct[];
+export interface ICartItem {
+  id: number;
+  count: number;
 }
 
-const initialState: ICartState = loadState<ICartState>(CART_PERSISTENT_STATE) ?? {
+export interface CartState {
+  items: ICartItem[];
+}
+
+const initialState: CartState = loadState<CartState>(CART_PERSISTENT_STATE) ?? {
   items: [],
 };
 
@@ -22,18 +27,33 @@ const cartSlice = createSlice({
     delete: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
     },
-    add: (state, action: PayloadAction<ICartProduct>) => {
-      const existed = state.items.find((i) => i === action.payload);
-      //   if (!existed) {
-      state.items.push(action.payload);
-      return;
-      //   }
-      //   state.items.map((i) => {
-      //     if (i === action.payload) {
-      //       i.count += 1;
-      //     }
-      //     return i;
-      //   });
+    remove: (state, action: PayloadAction<number>) => {
+      const existed = state.items.find((i) => i.id === action.payload);
+      if (!existed) {
+        return;
+      }
+      if (existed.count > 1) {
+        state.items.map((i) => {
+          if (i.id === action.payload) {
+            i.count -= 1;
+          }
+          return i;
+        });
+        return;
+      }
+    },
+    add: (state, action: PayloadAction<number>) => {
+      const existed = state.items.find((i) => i.id === action.payload);
+      if (!existed) {
+        state.items.push({ id: action.payload, count: 1 });
+        return;
+      }
+      state.items.map((i) => {
+        if (i.id === action.payload) {
+          i.count += 1;
+        }
+        return i;
+      });
     },
   },
 });

@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CartProduct from './CartProduct';
+import CartPage from './CartPage';
 
-const meta: Meta<typeof CartProduct> = {
-  title: 'Homework2/CartProduct',
-  component: CartProduct,
+
+const meta: Meta<typeof CartPage> = {
+  title: 'Homework2/CartPage',
+  component: CartPage,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

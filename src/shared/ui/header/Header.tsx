@@ -35,7 +35,7 @@ export const HeaderOrigin: FC = () => {
             </NavLink>
           </li>
           <li className="nav-item align-self-center">
-            <NavLink className="nav-link position-relative" to="/trash">
+            <NavLink className="nav-link position-relative" to="/cart">
               Корзина <span className="badge text-bg-light">{count === 0 ? null : count}</span>
             </NavLink>
           </li>

@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router';
 import { IFormLogin } from 'src/entities/interfaces/IFormLogin';
 import { useSignInMutation } from 'src/services/api/authApi.slice';
 import { ServerErrors } from 'src/entities/types/serverErrors';
-import { SignInBody } from 'src/entities/types/signIn';
+import type { SignInBody } from 'src/entities/types/signIn';
 
 function Login() {
   const {
@@ -16,18 +16,15 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormLogin>();
+
   const dispatch = useDispatch<AppDispath>();
   const navigate = useNavigate();
   const [checked, setChecked] = React.useState(false);
   const [signIn, { data, isLoading, error, isSuccess }] = useSignInMutation();
 
-  const handleChange = () => {
-    setChecked(!checked);
-  };
-
   useEffect(() => {
     if (isSuccess) {
-      var user: IUserState = {
+      const user: IUserState = {
         jwt: data.token,
         profile: { email: data.profile.email, isAdmin: checked },
       };
@@ -36,10 +33,14 @@ function Login() {
     } else if (error) {
       if ('status' in error) {
         const errMsg: ServerErrors = 'error' in error ? error.error : JSON.parse(JSON.stringify(error.data));
-        alert(errMsg.errors[0].message);
+        alert(errMsg?.errors[0]?.message);
       }
     }
-  }, [navigate, data, isSuccess, error, isLoading]);
+  }, [navigate, data, isSuccess, error, checked, dispatch]);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   const onSubmit: SubmitHandler<SignInBody> = async (data) => {
     await signIn(data);
@@ -49,22 +50,26 @@ function Login() {
     <>
       <form className="container w-50 needs-validation vstack" onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="mb-3">
-          <label className="form-label">Email</label>
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
           <input
             type="email"
             className={cn(['form-control', errors.email && 'is-invalid'])}
-            id="exampleInputEmail1"
+            id="email"
             aria-describedby="emailHelp"
             {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
             required
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Пароль</label>
+          <label htmlFor="password" className="form-label">
+            Пароль
+          </label>
           <input
             type="password"
             className={cn(['form-control', errors.password && 'is-invalid'])}
-            id="exampleInputPassword1"
+            id="password"
             {...register('password')}
             required
           />
@@ -81,7 +86,9 @@ function Login() {
       </form>
       <div className="mt-3">
         <div>Нет акканута?</div>
-        <Link to="/register">Зарегистрироваться</Link>
+        <Link to="/register-rtk">Зарегистрироваться(rtk)</Link>
+        <div className="vr mx-3"></div>
+        <Link to="/register-thunk">Зарегистрироваться(thunk)</Link>
       </div>
     </>
   );
