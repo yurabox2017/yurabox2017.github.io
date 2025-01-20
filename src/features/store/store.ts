@@ -16,8 +16,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({ user: userSlice, cart: cartSlice, product: productSlice });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-// const productReducer = combineReducers({ product: productSlice, cart: cartSlice });
-// const persistedReducer = persistReducer(persistConfig, productReducer);
 
 export const store = configureStore({
   reducer: {
@@ -38,9 +36,6 @@ export const store = configureStore({
     }).concat(authApi.middleware),
 });
 
-// store.subscribe(() => {
-//   saveState({ userData: store.getState().user }, JWT_PERSISTENT_STATE);
-// });
 setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;

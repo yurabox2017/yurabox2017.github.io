@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
-import type {PayloadAction} from "@reduxjs/toolkit"
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export const PRODUCT_PERSISTENT_STATE = 'productData';
 
@@ -25,16 +25,7 @@ const productSlice = createSlice({
     },
     add: (state, action: PayloadAction<IShortProduct>) => {
       const existed = state.items.find((i) => i === action.payload);
-      //   if (!existed) {
       state.items.push(action.payload);
-      return;
-      //   }
-      //   state.items.map((i) => {
-      //     if (i === action.payload) {
-      //       i.count += 1;
-      //     }
-      //     return i;
-      //   });
     },
   },
 });
