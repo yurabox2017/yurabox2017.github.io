@@ -32,7 +32,8 @@ const cartSlice = createSlice({
       if (!existed) {
         return;
       }
-      if (existed.count > 1) {
+      if (existed.count === 1) state.items = state.items.filter((i) => i.id !== action.payload);
+      else {
         state.items.map((i) => {
           if (i.id === action.payload) {
             i.count -= 1;

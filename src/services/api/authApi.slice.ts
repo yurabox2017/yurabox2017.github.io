@@ -6,7 +6,7 @@ import { PREFIX } from './API';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: PREFIX}),
+  baseQuery: fetchBaseQuery({ baseUrl: PREFIX }),
   endpoints: (build) => ({
     signUp: build.mutation<AuthResult, SignUpBody>({
       query: (data) => ({
@@ -21,6 +21,11 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
+      async onQueryStarted(post, { dispatch, queryFulfilled }) {
+        debugger
+        const { data } = await queryFulfilled;
+        console.log(data);
+      },
     }),
   }),
 });

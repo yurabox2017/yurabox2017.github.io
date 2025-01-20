@@ -1,16 +1,12 @@
-import React, { Children, memo, useState } from 'react';
+import React, { memo } from 'react';
 
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
 import { CartButton } from '../cartButton';
-import { AppDispath, RootState } from 'src/features/store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartActions } from 'src/features/store/cart.slice';
-import { ICartProduct } from 'src/entities/interfaces/ICartProduct';
+import { RootState } from 'src/features/store/store';
+import { useSelector } from 'react-redux';
 
 const ShortProduct = memo(function ShortProduct({ id, title, price, description, image }: IShortProduct) {
-  const product = { id, title, price, description, image } as IShortProduct;
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
-
   const item = cartItems.find((item) => item.id === id);
 
   return (
@@ -22,7 +18,7 @@ const ShortProduct = memo(function ShortProduct({ id, title, price, description,
         <p className="card-text">{description}</p>
       </div>
       <div className="card-foote1r pb-2">
-        <CartButton product={product} count={item.count} />
+        <CartButton id={id} count={item?.count ?? 0} />
       </div>
     </div>
   );
