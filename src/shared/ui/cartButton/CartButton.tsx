@@ -4,16 +4,20 @@ import ICartButton from 'src/entities/interfaces/ICartButton';
 import { cartActions } from 'src/features/store/cart.slice';
 import { AppDispath } from 'src/features/store/store';
 
-export const CartButton = ({ product, count }: ICartButton) => {
+export const CartButton = ({ id, count }: ICartButton) => {
   const dispatch = useDispatch<AppDispath>();
 
   const handleAdd = () => {
-    dispatch(cartActions.delete(product.id));
+    dispatch(cartActions.add(id));
   };
 
-  const handleIncrement = () => {};
+  const handleIncrement = () => {
+    dispatch(cartActions.add(id));
+  };
 
-  const handleDecrement = () => {};
+  const handleDecrement = () => {
+    dispatch(cartActions.remove(id));
+  };
 
   if (count === 0) {
     return (
@@ -22,6 +26,7 @@ export const CartButton = ({ product, count }: ICartButton) => {
       </button>
     );
   }
+
 
   return (
     <div className="input-group mb-3">

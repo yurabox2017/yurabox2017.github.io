@@ -1,7 +1,5 @@
-import { ICartProduct } from './ICartProduct';
-
 export default interface ICartButton {
-  product: ICartProduct;
+  id: number;
   count: number;
   // addProduct: () => void;
   // increment: () => void;

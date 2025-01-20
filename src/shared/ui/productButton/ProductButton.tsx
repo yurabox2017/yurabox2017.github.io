@@ -4,19 +4,18 @@ import ICartButton from 'src/entities/interfaces/ICartButton';
 import { cartActions } from 'src/features/store/cart.slice';
 import { AppDispath } from 'src/features/store/store';
 
-export const CartButton = ({ product }: ICartButton) => {
-  const [counter, setCounter] = useState<number>(0);
+export const CartButton = ({ id, count }: ICartButton) => {
   const dispatch = useDispatch<AppDispath>();
 
   const handleAdd = () => {
-    dispatch(cartActions.add(product.id));
+    dispatch(cartActions.add(id));
   };
 
   const handleIncrement = () => {};
 
   const handleDecrement = () => {};
 
-  if (counter === 0) {
+  if (count === 0) {
     return (
       <button className="btn btn-primary" onClick={handleAdd}>
         в корзину
@@ -29,7 +28,7 @@ export const CartButton = ({ product }: ICartButton) => {
       <span className="input-group-text" onClick={handleDecrement}>
         -
       </span>
-      <input type="text" className="form-control text-center" value={counter} readOnly />
+      <input type="text" className="form-control text-center" value={count} readOnly />
       <span className="input-group-text" onClick={handleIncrement}>
         +
       </span>
