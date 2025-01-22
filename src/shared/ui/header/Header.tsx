@@ -9,16 +9,14 @@ import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispath, RootState } from 'src/features/store/store';
 
-
 export const HeaderOrigin: FC = () => {
   const dispatch = useDispatch<AppDispath>();
   const count = useSelector((s: RootState) => s.rootReducer.cart?.items.length);
   const navigate = useNavigate();
 
   const logoutHandler = () => {
-     dispatch(logout());
-
-   };
+    dispatch(logout());
+  };
   const location = useLocation();
   return (
     <header>

@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router';
 import { EditProductModal } from 'src/shared/ui/modals/modal/EditProductModal';
 import Layout from 'src/shared/ui/layouts/Layout';
 import Main from 'src/widgets/main/Main';
-import ListProductPage from 'src/pages/Product/ProductPage';
+import ProductPage from 'src/pages/Product/ProductPage';
 import { ProtectedRouteAdmin } from 'src/routes/helpers/ProtectedRouteAdmin';
 import { RequireAuth } from 'src/routes/helpers/RequireAuth';
 import UserProfile from 'src/pages/profile/UserProfile';
@@ -13,7 +13,6 @@ import Login from 'src/pages/AuthScreen/SingInBlock/Login';
 import { RegisterThunkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterThunkPage';
 import CartPage from 'src/pages/Cart/CartPage';
 import { RegisterRtkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterRtkPage';
-
 
 export const CustomRoutes = () => {
   const location = useLocation();
@@ -33,7 +32,7 @@ export const CustomRoutes = () => {
             }
           />
           <Route path="/cart" Component={CartPage}></Route>
-          <Route path="/listProduct" Component={ListProductPage} />
+          <Route path="/listProduct" Component={ProductPage} />
           <Route path="*" Component={Error}></Route>
         </Route>
         <Route path="/login" Component={Login}></Route>

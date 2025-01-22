@@ -29,7 +29,7 @@ export const registerThunk = createAsyncThunk('user/signUp', async (params: Sign
     });
 
     if (!response.ok) {
-      let errBody = await response.json();
+      const errBody = await response.json();
       return Promise.reject(errBody.errors[0]);
     }
     return await response.json();

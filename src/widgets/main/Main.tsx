@@ -28,19 +28,12 @@ export default function Main() {
     ]);
   }
 
-  // useEffect(() => {
-  //   addProduct();
-  // }, []);
-
   useEffect(() => {
     if (inView) {
       addProduct();
     }
   }, [addProduct, inView]);
 
-  const onOpen = () => {
-    setVisible(true);
-  };
   const onClosed = () => {
     setProducts([]);
     setVisible(false);
@@ -69,9 +62,6 @@ export default function Main() {
           <li> {t(`key3`)}</li>
           <li>{t(`key4`)}</li>
         </ul>
-        <button className="btn btn-primary w-50" onClick={onOpen}>
-          Открыть модальное окно
-        </button>
         {modal}
       </div>
     </main>

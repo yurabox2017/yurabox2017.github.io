@@ -22,7 +22,6 @@ export const authApi = createApi({
         body: data,
       }),
       async onQueryStarted(post, { dispatch, queryFulfilled }) {
-        debugger
         const { data } = await queryFulfilled;
         console.log(data);
       },

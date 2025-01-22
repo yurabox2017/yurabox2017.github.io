@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import FuncProps from 'src/entities/interfaces/IFuncProps';
 import ShortProduct from '../shortProduct/ShortProduct';

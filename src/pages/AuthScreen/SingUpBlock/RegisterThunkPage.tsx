@@ -29,9 +29,13 @@ export const RegisterThunkPage = () => {
   return (
     <>
       <form className="container w-50 vstack" onSubmit={handleSubmit(onSubmitThunk)}>
-        <label htmlFor='email' className="form-label">Email</label>
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
         <input type="email" className="form-control" id="email" {...register('email')} />
-        <label htmlFor='password' className="form-label">Пароль</label>
+        <label htmlFor="password" className="form-label">
+          Пароль
+        </label>
         <input type="password" className="form-control" id="password" {...register('password')} />
         <div className="btn-group">
           <button type="submit" className="btn btn-primary mt-3" disabled={status === 'loading'}>

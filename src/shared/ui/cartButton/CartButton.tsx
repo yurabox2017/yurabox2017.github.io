@@ -27,7 +27,6 @@ export const CartButton = ({ id, count }: ICartButton) => {
     );
   }
 
-
   return (
     <div className="input-group mb-3">
       <span className="input-group-text" onClick={handleDecrement}>

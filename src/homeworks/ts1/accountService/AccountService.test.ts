@@ -36,7 +36,6 @@ describe('AccountService', () => {
     expect(discountStandard).toBe(25);
     expect(discountGold).toBe(30);
     expect(discountFree).toBe(0);
-    
   });
 
   it('Set user negative discount', () => {

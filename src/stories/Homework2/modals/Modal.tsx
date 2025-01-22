@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import ModalOverlay from './ModalOverlay';
 import './Modal.css';
 import IModal from '../../../entities/interfaces/IModal';

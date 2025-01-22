@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default interface IShortProduct {
   id: number;
   category: string;

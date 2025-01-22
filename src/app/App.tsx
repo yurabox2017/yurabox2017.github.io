@@ -20,7 +20,6 @@ function App() {
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-    setHtmlAttribute();
   };
 
   return (
@@ -30,7 +29,6 @@ function App() {
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <div className={`App border border-bottom-dark`}>
             <CustomRoutes />
-            {/* <RouterProvider router={routes} /> */}
           </div>
         </ThemeContext.Provider>
       </I18nextProvider>

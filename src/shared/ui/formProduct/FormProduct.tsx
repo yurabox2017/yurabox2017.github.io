@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import IFullProduct from 'src/entities/interfaces/IFullProduct';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import cn from 'clsx';
 import { useDispatch } from 'react-redux';
