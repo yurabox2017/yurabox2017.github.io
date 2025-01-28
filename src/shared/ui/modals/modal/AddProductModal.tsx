@@ -17,7 +17,7 @@ export const AddProductModal = () => {
 
   return (
     <Modal header="Добавить товар" visible={visible} onClose={onClosed}>
-      {<FormProduct />}
+      <FormProduct setUnVisible={onClosed} />
     </Modal>
   );
 };

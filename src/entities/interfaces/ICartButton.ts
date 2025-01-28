@@ -1,6 +1,6 @@
 export default interface ICartButton {
-  id: number;
-  count: number;
+  id: string;
+  quantity: number;
   // addProduct: () => void;
   // increment: () => void;
   // decrement: () => void;

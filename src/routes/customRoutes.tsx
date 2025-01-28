@@ -22,7 +22,6 @@ export const CustomRoutes = () => {
     <>
       <Routes location={previousLocation || location}>
         <Route path="/" Component={Layout}>
-          <Route path="/" Component={Main}></Route>
           <Route
             path="/userProfile"
             element={
@@ -32,17 +31,17 @@ export const CustomRoutes = () => {
             }
           />
           <Route path="/cart" Component={CartPage}></Route>
-          <Route path="/listProduct" Component={ProductPage} />
+          <Route path="/" Component={ProductPage} />
+          <Route path="/login" Component={Login}></Route>
+          <Route path="/register-rtk" Component={RegisterRtkPage}></Route>
+          <Route path="/register-thunk" Component={RegisterThunkPage}></Route>
           <Route path="*" Component={Error}></Route>
         </Route>
-        <Route path="/login" Component={Login}></Route>
-        <Route path="/register-rtk" Component={RegisterRtkPage}></Route>
-        <Route path="/register-thunk" Component={RegisterThunkPage}></Route>
       </Routes>
       {previousLocation && (
         <Routes>
           <Route
-            path="/listProduct/add"
+            path="/add"
             element={
               <ProtectedRouteAdmin>
                 <AddProductModal />

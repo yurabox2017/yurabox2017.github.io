@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispath, RootState } from 'src/features/store/store';
-import { productActions } from 'src/features/store/product.slice';
+import { useLazyGetProductsQuery } from 'src/services/api/productApi.slice';
 
 const ProductPage = () => {
-  const { ref, inView } = useInView({ threshold: 0.7 });
+  // const { isLoading, data } = useGetProductsQuery({ pageSize: 30, pageNumber: 1 }, { refetchOnMountOrArgChange: true });
+  const [counter, setCounter] = useState(1);
+  const [loadAllProducts, { isLoading, data }] = useLazyGetProductsQuery();
 
-  const products = useSelector((s: RootState) => s.rootReducer.product.items);
-  const dispatch = useDispatch<AppDispath>();
+  const handleLoadMoreProducts = async () => {
+    // if (isLoading) return;
+    setCounter((prev) => prev + 1);
 
+    await loadAllProducts({ pageSize: 10, pageNumber: counter });
+  };
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    onChange: () => handleLoadMoreProducts(),
+  });
+
+  if (isLoading) return <span>Loading...</span>;
   return (
-    <>
-      <button className="btn btn-danger my-2" onClick={() => dispatch(productActions.clear())}>
-        Очистить
-      </button>
-      <div className="row row-cols-1 gap-3 justify-content-center">
-        <ListProduct products={products} />
-      </div>
-    </>
+    <div className="row row-cols-1 gap-3 justify-content-center">
+      {data && <ListProduct products={data} />}
+      <span className="border border-top" ref={ref}>
+        dsfsdfsf
+      </span>
+    </div>
   );
 };
 

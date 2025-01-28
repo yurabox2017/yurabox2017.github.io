@@ -28,7 +28,7 @@ export const RegisterThunkPage = () => {
 
   return (
     <>
-      <form className="container w-50 vstack" onSubmit={handleSubmit(onSubmitThunk)}>
+      <form className="container w-50 vstack gap-2" onSubmit={handleSubmit(onSubmitThunk)}>
         <label htmlFor="email" className="form-label">
           Email
         </label>

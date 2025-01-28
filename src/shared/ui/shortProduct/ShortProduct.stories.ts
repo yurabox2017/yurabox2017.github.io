@@ -15,9 +15,9 @@ type Story = StoryObj<typeof meta>;
 
 export const PrimaryProduct: Story = {
   args: {
-    title: 'Чистящие средства',
+    name: 'Чистящие средства',
     price: 5000,
-    description: 'Хорошо очищает любые загрязнения',
-    image: '/free-icon-household-7029117.png',
+    desc: 'Хорошо очищает любые загрязнения',
+    photo: '/free-icon-household-7029117.png',
   },
 };

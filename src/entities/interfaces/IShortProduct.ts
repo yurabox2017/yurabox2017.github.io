@@ -1,8 +1,8 @@
 export default interface IShortProduct {
-  id: number;
+  id: string;
   category: string;
   title: string;
   price: number;
   description: string;
-  image: string;
+  imageUrl: string;
 }

@@ -7,8 +7,8 @@ function Layout() {
   return (
     <>
       <Header />
-      <div className="" style={{ marginTop: '55px' }}>
-        <hr className="mt-0" />
+
+      <div className="container overflow-auto" style={{ marginTop: '4rem', height: 'calc(100vh - 7rem)' }}>
         <Outlet />
       </div>
     </>

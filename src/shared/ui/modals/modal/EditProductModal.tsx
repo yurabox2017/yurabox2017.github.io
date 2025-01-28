@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 export const EditProductModal = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     setVisible(true);
     return () => setVisible(false);
@@ -18,7 +19,7 @@ export const EditProductModal = () => {
 
   return (
     <Modal header="Редактировать товар" visible={visible} onClose={onClosed}>
-      {<FormProduct />}
+    
     </Modal>
   );
 };

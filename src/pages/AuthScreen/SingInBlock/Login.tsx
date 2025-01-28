@@ -48,38 +48,35 @@ function Login() {
 
   return (
     <>
-      <form className="container w-50 needs-validation vstack" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className={cn(['form-control', errors.email && 'is-invalid'])}
-            id="email"
-            aria-describedby="emailHelp"
-            {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Пароль
-          </label>
-          <input
-            type="password"
-            className={cn(['form-control', errors.password && 'is-invalid'])}
-            id="password"
-            {...register('password')}
-            required
-          />
-        </div>
-        <div className="btn-group mb-3 w-25 mx-auto text-center" role="group">
-          <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
-          <label className="btn btn-outline-primary" htmlFor="btncheck1">
-            Админ
-          </label>
-        </div>
+      <form className="container w-50 needs-validation vstack gap-2" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <label htmlFor="email" className="form-label">
+          Email
+        </label>
+        <input
+          type="email"
+          className={cn(['form-control', errors.email && 'is-invalid'])}
+          id="email"
+          aria-describedby="emailHelp"
+          {...register('email', { required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g })}
+          required
+        />
+
+        <label htmlFor="password" className="form-label">
+          Пароль
+        </label>
+        <input
+          type="password"
+          className={cn(['form-control', errors.password && 'is-invalid'])}
+          id="password"
+          {...register('password')}
+          required
+        />
+
+        <label className="btn btn-outline-primary w-25 mx-auto" htmlFor="btncheck1">
+          Админ
+        </label>
+        <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
+
         <button type="submit" className="btn btn-primary" disabled={isLoading}>
           Войти
         </button>

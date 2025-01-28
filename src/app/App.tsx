@@ -4,7 +4,7 @@ import { Theme, ThemeContext } from 'src/context/themeContext';
 import { LocalizationInitiator } from 'src/localization/LocalizationInitiator';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'src/localization/settings';
-import { CustomRoutes } from 'src/routes/routes';
+import { CustomRoutes } from 'src/routes/customRoutes';
 
 function App() {
   const [theme, setTheme] = useState<Theme>(() => 'light');
