@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ICartButton from 'src/entities/interfaces/ICartButton';
 import { cartActions } from 'src/features/store/cart.slice';
-import { AppDispath } from 'src/features/store/store';
+import { AppDispath, RootState } from 'src/features/store/store';
 
 export const CartButton = ({ id, quantity }: ICartButton) => {
   const dispatch = useDispatch<AppDispath>();
+  const isAuth = !!useSelector((s: RootState) => s.rootReducer.user?.jwt);
 
   const handleAdd = () => {
     dispatch(cartActions.add(id));
@@ -18,7 +19,7 @@ export const CartButton = ({ id, quantity }: ICartButton) => {
   const handleDecrement = () => {
     dispatch(cartActions.remove(id));
   };
-
+  if (!isAuth) return <></>;
   if (quantity === 0) {
     return (
       <button className="btn btn-sm btn-primary" onClick={handleAdd}>

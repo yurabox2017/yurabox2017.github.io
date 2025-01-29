@@ -3,6 +3,7 @@ import { AuthResult } from 'src/entities/types/authResult';
 import { AuthLoginResult, SignInBody } from 'src/entities/types/signIn';
 import { SignUpBody } from 'src/entities/types/signUp';
 import { PREFIX } from './API';
+import { ServerErrors } from 'src/entities/types/serverErrors';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -21,9 +22,12 @@ export const authApi = createApi({
         method: 'POST',
         body: data,
       }),
-      async onQueryStarted(post, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled;
-        console.log(data);
+      transformErrorResponse: (error) => {
+        if ('status' in error) {
+          const serverErrors = error.data as ServerErrors;
+          return serverErrors.errors[0]?.message;
+        }
+        return error;
       },
     }),
   }),

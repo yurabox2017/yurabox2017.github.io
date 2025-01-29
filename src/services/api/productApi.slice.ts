@@ -4,6 +4,8 @@ import type { Product } from 'src/entities/types/product';
 import { productActions } from 'src/features/store/product.slice';
 import { ServerErrors } from 'src/entities/types/serverErrors';
 import { RootState } from 'src/features/store/store';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export type Params = {
   name: string;
@@ -48,6 +50,24 @@ export const productApi = createApi({
       query: (params) => `/products?${urlParams(params.pageSize, params.pageNumber)}`,
       providesTags: ['Product'],
       transformResponse: (response: IProductsResponse) => response?.data,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCash, newItems) => {
+        currentCash.push(...newItems);
+      },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg.pageNumber !== previousArg.pageNumber;
+      },
+    }),
+    getProductById: build.query<Product, string>({
+      query: (id) => `/products/${id}`,
+      providesTags: ['Product'],
+      transformErrorResponse: (error) => {
+        if ('status' in error) {
+          return error;
+        }
+      },
     }),
     addProduct: build.mutation<Product, Params>({
       query: (data) => ({
@@ -57,6 +77,7 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['Product'],
     }),
+
     editProduct: build.mutation<Product, { params: Params; id: string }>({
       query: ({ params: data, id }) => ({
         url: `/products/${id}`,
@@ -68,5 +89,11 @@ export const productApi = createApi({
   }),
 });
 
-export const { useGetProductsQuery, useAddProductMutation, useEditProductMutation, useLazyGetProductsQuery } =
-  productApi;
+export const {
+  useGetProductsQuery,
+  useAddProductMutation,
+  useEditProductMutation,
+  useLazyGetProductsQuery,
+  useGetProductByIdQuery,
+  useLazyGetProductByIdQuery,
+} = productApi;

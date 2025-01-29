@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
-import { useLazyGetProductsQuery } from 'src/services/api/productApi.slice';
+import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
 import ShortProduct from 'src/shared/ui/shortProduct/ShortProduct';
 import { Product } from 'src/entities/types/product';
 import { OrderButton } from 'src/shared/ui/order/OrderButton';
 
 const CartPage = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
-  const [loadAllProducts, { isLoading }] = useLazyGetProductsQuery();
+  const [loadProductById, { isLoading }] = useLazyGetProductByIdQuery();
 
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
 
+  const getProduct = async (id: string): Promise<Product> => {
+    try {
+      const product = await loadProductById(id).unwrap();
+      return product;
+    } catch (e) {
+      return null;
+    }
+  };
+
   const loadCartProducts = async () => {
-    const data = await loadAllProducts({ pageSize: 30, pageNumber: 1 }, false).unwrap();
-    const products = cartItems.map((item) => data.find((product) => product.id === item.id));
-    setCartProducts(products);
+    const products = await Promise.all(cartItems.map((item) => getProduct(item.id)));
+
+    setCartProducts(products.filter((item) => item !== null));
   };
 
   const total = cartItems
@@ -39,9 +48,7 @@ const CartPage = () => {
       <div className="overflow-auto" style={{ height: '75vh' }}>
         <div className="row row-cols-1 gap-3 justify-content-center">
           {cartItems.map((item) => {
-            const cartProduct = cartProducts.find((p) => {
-              if (p) return p.id === item.id;
-            });
+            const cartProduct = cartProducts.find((p) => p.id === item.id);
             if (!cartProduct) {
               return;
             }

@@ -35,52 +35,50 @@ export const HeaderOrigin: FC = () => {
   );
 
   return (
-    <header>
-      <nav className={`${cn('navbar navbar-expand-sm border-bottom  fixed-top px-3 ')}`}>
-        <ul className="navbar-nav ms-auto w-25">
+    <nav className={`${cn('navbar navbar-expand-sm border-bottom  fixed-top px-3 ')}`}>
+      <ul className="navbar-nav ms-auto w-25">
+        <li className="nav-item align-self-center">
+          <NavLink className="nav-link" to="/">
+            Список товаров
+          </NavLink>
+        </li>
+        {!isAdmin && (
           <li className="nav-item align-self-center">
-            <NavLink className="nav-link" to="/">
-              Список товаров
+            <NavLink className="nav-link position-relative" to="/cart">
+              Корзина <span className="badge text-bg-light">{count === 0 ? null : count}</span>
             </NavLink>
           </li>
-          {!isAdmin && (
-            <li className="nav-item align-self-center">
-              <NavLink className="nav-link position-relative" to="/cart">
-                Корзина <span className="badge text-bg-light">{count === 0 ? null : count}</span>
-              </NavLink>
-            </li>
-          )}
-        </ul>
-        <div className="mx-auto align-self-center">
-          <NavLink className="nav-link" to="/">
-            <Logo />
-          </NavLink>
-        </div>
-        <ul className="navbar-nav ms-auto w-25">
-          {isAdmin && (
-            <li className="nav-item align-self-center">
-              <NavLink className="nav-link" to="/add" state={{ previousLocation: location }}>
-                Добавить товар
-              </NavLink>
-            </li>
-          )}
+        )}
+      </ul>
+      <div className="mx-auto align-self-center">
+        <NavLink className="nav-link" to="/">
+          <Logo />
+        </NavLink>
+      </div>
+      <ul className="navbar-nav ms-auto w-25">
+        {isAdmin && (
           <li className="nav-item align-self-center">
-            <ChangeThemeButton />
+            <NavLink className="nav-link" to="/add" state={{ previousLocation: location }}>
+              Добавить товар
+            </NavLink>
           </li>
-          <li className="nav-item alig-self-center">
-            <LangSwitcher />
+        )}
+        <li className="nav-item align-self-center">
+          <ChangeThemeButton />
+        </li>
+        <li className="nav-item alig-self-center">
+          <LangSwitcher />
+        </li>
+        {isAuth && (
+          <li className="nav-item align-self-center">
+            <NavLink className="nav-link" to="/userProfile">
+              Профиль
+            </NavLink>
           </li>
-          {isAuth && (
-            <li className="nav-item align-self-center">
-              <NavLink className="nav-link" to="/userProfile">
-                Профиль
-              </NavLink>
-            </li>
-          )}
-          <li className="nav-item alig-self-center">{isAuth ? logoutLink : loginLink}</li>
-        </ul>
-      </nav>
-    </header>
+        )}
+        <li className="nav-item alig-self-center">{isAuth ? logoutLink : loginLink}</li>
+      </ul>
+    </nav>
   );
 };
 HeaderOrigin.displayName = 'HeaderOrigin';

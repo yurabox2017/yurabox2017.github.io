@@ -28,14 +28,16 @@ const ShortProduct = memo(function ShortProduct(product: Product) {
 
   return (
     <>
-      <div className="card text-center" style={{ width: '10rem' }}>
-        <img src={product.photo} className="card-img-top" alt="..." style={{ objectFit: 'contain' }} />
+      <div className="card text-center" style={{ width: '15rem', height: '25rem' }}>
+        <img src={product.photo} className="card-img-top" alt="..." style={{ objectFit: 'contain', height: '10rem' }} />
         <div className="card-body">
           <h5 className="card-title">Название: {product.name}</h5>
-          <p className="card-subtitle mb-auto">Описание: {product.desc}</p>
-          <p className="card-text text-muted">Цена: {product.price}</p>
+          <div className="overflow-scroll" style={{ height: '50px' }}>
+            <p className="card-subtitle ">Описание: {product.desc}</p>
+          </div>
         </div>
         <div className=" pb-2">
+          <p className="card-text text-muted ">Цена: {product.price}</p>
           {isAdmin ? (
             <button className="btn btn-secondary btn-sm" onClick={handleEditProduct}>
               Редактировать
