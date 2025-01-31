@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import userSlice from './user.slice';
 import cartSlice from './cart.slice';
@@ -48,4 +48,4 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispath = typeof store.dispatch;
 export const persistor = persistStore(store);
 export type ExtraParams = { url: string; version: string };
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, ExtraParams, AnyAction>;
+// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, ExtraParams, AnyAction>;
