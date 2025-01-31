@@ -8,7 +8,7 @@ const ProductPage = () => {
   const [page, setPage] = useState(1);
   const { isLoading, data: response, isFetching } = useGetProductsQuery(page);
 
-  const { ref } = useInView({ threshold: 0.5, onChange: () => handleLoadMoreProducts() });
+  const { ref } = useInView({ threshold: 1, onChange: () => handleLoadMoreProducts() });
 
   const handleLoadMoreProducts = async () => {
     if (Math.round(response?.pagination.total / 30) > page) {

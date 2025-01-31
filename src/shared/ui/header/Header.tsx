@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC} from 'react';
 import { withTranslation } from 'react-i18next';
 import Logo from '../logo/Logo';
 import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
@@ -9,6 +9,7 @@ import { ChangeThemeButton } from '../changeThemeButton/ChangeThemeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispath, RootState } from 'src/features/store/store';
 import { authApi } from 'src/services/api/authApi.slice';
+import { productApi } from 'src/services/api/productApi.slice';
 
 export const HeaderOrigin: FC = () => {
   const dispatch = useDispatch<AppDispath>();
@@ -16,12 +17,13 @@ export const HeaderOrigin: FC = () => {
   const isAuth = !!useSelector((s: RootState) => s.rootReducer.user?.jwt);
   const isAdmin = !!useSelector((s: RootState) => s.rootReducer.user?.profile?.isAdmin);
   const location = useLocation();
+  
   const logoutHandler = () => {
-    dispatch(authApi.util.resetApiState());
+    dispatch(productApi.util.resetApiState());
     dispatch(logout());
   };
   const loginHandler = () => {
-    dispatch(authApi.util.resetApiState());
+    dispatch(productApi.util.resetApiState());
   };
   const loginLink = (
     <Link to="/login" className="nav-link" onClick={loginHandler}>

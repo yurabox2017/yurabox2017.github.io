@@ -5,16 +5,20 @@ import { useSelector } from 'react-redux';
 import { Product } from 'src/entities/types/product';
 import Modal from '../modals/modal/Modal';
 import FormProduct from '../formProduct/FormProduct';
+import { useDeleteProductMutation } from 'src/services/api/productApi.slice';
 
 const ShortProduct = memo(function ShortProduct(product: Product) {
   const [visible, setVisible] = useState(false);
-
+  const [deleteProduct, { isLoading }] = useDeleteProductMutation();
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
   const isAdmin = useSelector((s: RootState) => s.rootReducer.user?.profile?.isAdmin);
   const item = cartItems.find((item) => item.id === product.id);
 
   const handleEditProduct = () => {
     setVisible(true);
+  };
+  const handleDeleteProduct = () => {
+    deleteProduct(product.id);
   };
   const handleClosed = () => {
     setVisible(false);
@@ -39,9 +43,14 @@ const ShortProduct = memo(function ShortProduct(product: Product) {
         <div className=" pb-2">
           <p className="card-text text-muted ">Цена: {product.price}</p>
           {isAdmin ? (
-            <button className="btn btn-secondary btn-sm" onClick={handleEditProduct}>
-              Редактировать
-            </button>
+            <div className="btn-group">
+              <button className="btn btn-secondary btn-sm" disabled={isLoading} onClick={handleEditProduct}>
+                Редактировать
+              </button>
+              <button className="btn btn-danger btn-sm" disabled={isLoading} onClick={handleDeleteProduct}>
+                Удалить
+              </button>
+            </div>
           ) : (
             <CartButton id={product.id} quantity={item?.quantity ?? 0} />
           )}

@@ -4,7 +4,7 @@ import cn from 'clsx';
 import { useDispatch } from 'react-redux';
 import { AppDispath } from 'src/features/store/store';
 import IShortProduct from 'src/entities/interfaces/IShortProduct';
-import { useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
+import { productApi, useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
 import { Product } from 'src/entities/types/product';
 
 interface IFormProps {
@@ -13,6 +13,7 @@ interface IFormProps {
 }
 
 const FormProduct: FC<IFormProps> = ({ product, setUnVisible }) => {
+  const dispatch = useDispatch<AppDispath>();
   const {
     register,
     handleSubmit,
@@ -24,6 +25,7 @@ const FormProduct: FC<IFormProps> = ({ product, setUnVisible }) => {
   const [editProduct, { isLoading: isEditLoading, isSuccess: isEditSuccess }] = useEditProductMutation();
 
   const onAddSubmit: SubmitHandler<Product> = (data) => {
+    dispatch(productApi.util.resetApiState());
     addProduct({
       ...data,
       categoryId: '6792aaab8e877ac8a95a8a89',

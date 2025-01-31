@@ -48,20 +48,15 @@ export const productApi = createApi({
   endpoints: (build) => ({
     getProducts: build.query<IProductsResponse, number>({
       query: (page = 1) => `/products?${urlParams(page)}`,
-      providesTags: (result, error, page) =>
-        result
-          ? [
-              ...result.data.map(({ id }) => ({ type: 'Product' as const, id })),
-              { type: 'Product', id: 'PARTIAL-LIST' },
-            ]
-          : [{ type: 'Product', id: 'PARTIAL-LIST' }],
-      // providesTags: ['Product'],
+      providesTags: ['Product'],
       transformResponse: (response: IProductsResponse) => response,
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: ({ data: currentCash }, { data: newItems }) => {
-        currentCash.push(...newItems);
+      merge: (currentCash, newItem) => {
+        if (newItem.pagination.pageNumber === 1) currentCash.data = [];
+
+        currentCash.data.push(...newItem.data);
       },
       forceRefetch: ({ currentArg, previousArg }) => {
         return currentArg !== previousArg;
@@ -93,6 +88,13 @@ export const productApi = createApi({
       }),
       invalidatesTags: ['Product'],
     }),
+    deleteProduct: build.mutation<Product, string>({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Product'],
+    }),
   }),
 });
 
@@ -103,4 +105,5 @@ export const {
   useLazyGetProductsQuery,
   useGetProductByIdQuery,
   useLazyGetProductByIdQuery,
+  useDeleteProductMutation,
 } = productApi;
