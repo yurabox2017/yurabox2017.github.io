@@ -2,25 +2,24 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
 import { useGetProductsQuery, useLazyGetProductsQuery } from 'src/services/api/productApi.slice';
+import { round } from 'src/homeworks/ts1/1_base';
 
 const ProductPage = () => {
-  const [counter, setCounter] = useState(1);
-  const { isLoading, data } = useGetProductsQuery(
-    { pageSize: 30, pageNumber: counter },
-    { refetchOnMountOrArgChange: true }
-  );
+  const [page, setPage] = useState(1);
+  const { isLoading, data: response, isFetching } = useGetProductsQuery(page);
 
-  const { ref, inView } = useInView({ threshold: 1, onChange: () => handleLoadMoreProducts() });
+  const { ref } = useInView({ threshold: 0.5, onChange: () => handleLoadMoreProducts() });
 
   const handleLoadMoreProducts = async () => {
-    setCounter((prev) => prev + 1);
+    if (Math.round(response?.pagination.total / 30) > page) {
+      setPage((prev) => prev + 1);
+    }
   };
 
-  if (isLoading) return <span>Loading...</span>;
   return (
     <div className="row row-cols-1 gap-3 justify-content-center">
-      {data && <ListProduct products={data} />}
-      <span ref={ref}> </span>
+      {response?.data && <ListProduct products={response?.data} />}
+      <span ref={ref}>{isFetching && <span>Loading...</span>}</span>
     </div>
   );
 };

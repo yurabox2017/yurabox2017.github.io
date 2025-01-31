@@ -25,11 +25,11 @@ export interface IProductsResponse {
   };
 }
 
-const urlParams = (pageSize: number, pageNumber: number) =>
+const urlParams = (page: number) =>
   new URLSearchParams({
     pagination: JSON.stringify({
-      pageSize: pageSize,
-      pageNumber: pageNumber,
+      pageSize: 30,
+      pageNumber: page,
     }),
     sorting: JSON.stringify({ type: 'DESC', field: 'id' }),
   }).toString();
@@ -46,18 +46,25 @@ export const productApi = createApi({
   }),
   tagTypes: ['Product'],
   endpoints: (build) => ({
-    getProducts: build.query<Product[], { pageSize?: number; pageNumber?: number }>({
-      query: (params) => `/products?${urlParams(params.pageSize, params.pageNumber)}`,
-      providesTags: ['Product'],
-      transformResponse: (response: IProductsResponse) => response?.data,
+    getProducts: build.query<IProductsResponse, number>({
+      query: (page = 1) => `/products?${urlParams(page)}`,
+      providesTags: (result, error, page) =>
+        result
+          ? [
+              ...result.data.map(({ id }) => ({ type: 'Product' as const, id })),
+              { type: 'Product', id: 'PARTIAL-LIST' },
+            ]
+          : [{ type: 'Product', id: 'PARTIAL-LIST' }],
+      // providesTags: ['Product'],
+      transformResponse: (response: IProductsResponse) => response,
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCash, newItems) => {
+      merge: ({ data: currentCash }, { data: newItems }) => {
         currentCash.push(...newItems);
       },
       forceRefetch: ({ currentArg, previousArg }) => {
-        return currentArg.pageNumber !== previousArg.pageNumber;
+        return currentArg !== previousArg;
       },
     }),
     getProductById: build.query<Product, string>({
