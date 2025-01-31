@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispath, RootState } from 'src/features/store/store';
-import { productActions } from 'src/features/store/product.slice';
+import { useGetProductsQuery, useLazyGetProductsQuery } from 'src/services/api/productApi.slice';
+import { round } from 'src/homeworks/ts1/1_base';
 
 const ProductPage = () => {
-  const { ref, inView } = useInView({ threshold: 0.7 });
+  const [page, setPage] = useState(1);
+  const { isLoading, data: response, isFetching } = useGetProductsQuery(page);
 
-  const products = useSelector((s: RootState) => s.rootReducer.product.items);
-  const dispatch = useDispatch<AppDispath>();
+  const { ref } = useInView({ threshold: 1, onChange: () => handleLoadMoreProducts() });
+
+  const handleLoadMoreProducts = async () => {
+    if (Math.round(response?.pagination.total / 30) > page) {
+      setPage((prev) => prev + 1);
+    }
+  };
 
   return (
-    <>
-      <button className="btn btn-danger my-2" onClick={() => dispatch(productActions.clear())}>
-        Очистить
-      </button>
-      <div className="row row-cols-1 gap-3 justify-content-center">
-        <ListProduct products={products} />
-      </div>
-    </>
+    <div className="row row-cols-1 gap-3 justify-content-center">
+      {response?.data && <ListProduct products={response?.data} />}
+      <span ref={ref}>{isFetching && <span>Loading...</span>}</span>
+    </div>
   );
 };
 

@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loadState } from './storage';
-import IShortProduct from 'src/entities/interfaces/IShortProduct';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { Product } from 'src/entities/types/product';
 
 export const PRODUCT_PERSISTENT_STATE = 'productData';
 
 export interface IProductState {
-  items: IShortProduct[];
+  items: Product[];
 }
 
 const initialState: IProductState = loadState<IProductState>(PRODUCT_PERSISTENT_STATE) ?? {
@@ -20,12 +20,16 @@ const productSlice = createSlice({
     clear: (state) => {
       state.items = [];
     },
-    delete: (state, action: PayloadAction<number>) => {
+    delete: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((i) => i.id !== action.payload);
     },
-    add: (state, action: PayloadAction<IShortProduct>) => {
-      const existed = state.items.find((i) => i === action.payload);
+    add: (state, action: PayloadAction<Product>) => {
+      // const existed = state.items.find((i) => i === action.payload);
       state.items.push(action.payload);
+    },
+    load: (state, action: PayloadAction<Product[]>) => {
+      // const existed = state.items.find((i) => i === action.payload);
+      state.items = action.payload;
     },
   },
 });

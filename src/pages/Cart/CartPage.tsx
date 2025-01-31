@@ -1,17 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
-import { ListProduct } from 'src/shared/ui/listProduct';
+import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
+import ShortProduct from 'src/shared/ui/shortProduct/ShortProduct';
+import { Product } from 'src/entities/types/product';
+import { OrderButton } from 'src/shared/ui/order/OrderButton';
 
 const CartPage = () => {
-  const allProducts = useSelector((s: RootState) => s.rootReducer.product.items);
+  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [loadProductById, { isLoading }] = useLazyGetProductByIdQuery();
+
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
 
-  const products = cartItems.map((item) => allProducts.find((product) => product.id === item.id));
+  const getProduct = async (id: string): Promise<Product> => {
+    try {
+      const product = await loadProductById(id).unwrap();
+      return product;
+    } catch (e) {
+      return null;
+    }
+  };
 
+  const loadCartProducts = async () => {
+    const products = await Promise.all(cartItems.map((item) => getProduct(item.id)));
+
+    setCartProducts(products.filter((item) => item !== null));
+  };
+
+  const total = cartItems
+    .map((i) => {
+      const product = cartProducts.find((p) => p && p.id === i.id);
+      if (!product) {
+        return 0;
+      }
+      return i.quantity * product.price;
+    })
+    .reduce((acc, i) => (acc += i), 0);
+
+  useEffect(() => {
+    loadCartProducts();
+  }, [cartItems]);
+
+  if (isLoading) return <span>Loading...</span>;
+  if (cartProducts.length === 0) return <span>нет товаров в корзине</span>;
   return (
-    <div className="row row-cols-1 gap-3 justify-content-center">
-      <ListProduct products={products} />
+    <div className="container">
+      <div className="overflow-auto" style={{ height: '75vh' }}>
+        <div className="row row-cols-1 gap-3 justify-content-center">
+          {cartItems.map((item) => {
+            const cartProduct = cartProducts.find((p) => p.id === item.id);
+            if (!cartProduct) {
+              return;
+            }
+            return <ShortProduct key={cartProduct.id} {...cartProduct} />;
+          })}
+        </div>
+      </div>
+      <hr />
+      <div className="row">
+        <OrderButton total={total} />
+      </div>
     </div>
   );
 };

@@ -25,7 +25,7 @@ export const RegisterRtkPage = () => {
 
   return (
     <>
-      <form className="container w-50 vstack" onSubmit={handleSubmit(onSubmitRtk)}>
+      <form className="container w-50 vstack gap-2" onSubmit={handleSubmit(onSubmitRtk)}>
         <label htmlFor="email" className="form-label">
           Email
         </label>
