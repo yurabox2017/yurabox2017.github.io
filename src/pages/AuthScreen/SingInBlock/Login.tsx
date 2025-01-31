@@ -64,21 +64,20 @@ function Login() {
           {...register('password')}
           required
         />
-        <div className="form-check">
-          <label
-            className={cn([
-              'btn mx-auto w-25',
-              {
-                ['btn-outline-primary']: !checked,
-                ['btn-success']: checked,
-              },
-            ])}
-            htmlFor="btncheck1"
-          >
-            Админ
-          </label>
-          <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
-        </div>
+        <label
+          className={cn([
+            'btn mx-auto w-25',
+            {
+              ['btn-outline-primary']: !checked,
+              ['btn-success']: checked,
+            },
+          ])}
+          htmlFor="btncheck1"
+        >
+          Админ
+        </label>
+        <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
+
         <button type="submit" className="btn btn-primary" disabled={isLoading}>
           Войти
         </button>
