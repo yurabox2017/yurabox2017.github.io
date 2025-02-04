@@ -10,7 +10,7 @@ import { RequireAuth } from 'src/routes/helpers/RequireAuth';
 import React from 'react';
 import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
 import { ProtectedRouteAdmin } from './helpers/ProtectedRouteAdmin';
-import CartPage from 'src/pages/cart/CartPage';
+import { CartPage } from 'src/pages/cart/CartPage';
 
 export const routes = createBrowserRouter([
   {

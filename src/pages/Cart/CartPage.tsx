@@ -6,7 +6,7 @@ import { Product } from 'src/shared/ui/product/Product';
 import type { Product as ProductEntity } from 'src/entities/types/product';
 import { OrderButton } from 'src/shared/ui/order/OrderButton';
 
-const CartPage = () => {
+export const CartPage = () => {
   const [cartProducts, setCartProducts] = useState<ProductEntity[]>([]);
   const [loadProductById, { isLoading }] = useLazyGetProductByIdQuery();
 
@@ -63,4 +63,3 @@ const CartPage = () => {
     </div>
   );
 };
-export default CartPage;
