@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     setHtmlAttribute();
-  }, [theme]);
+  }, [theme, setHtmlAttribute]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));

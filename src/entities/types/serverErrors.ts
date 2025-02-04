@@ -1,4 +1,4 @@
-export type  ServerErrors = {
+export type ServerErrors = {
   errors: {
     extensions: {
       code: ErrorCode;

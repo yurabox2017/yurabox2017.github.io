@@ -1,4 +1,4 @@
-import React, { FC} from 'react';
+import React, { FC } from 'react';
 import { withTranslation } from 'react-i18next';
 import Logo from '../logo/Logo';
 import { LangSwitcher } from 'src/features/LangSwitcher/LangSwitcher';
@@ -17,7 +17,7 @@ export const HeaderOrigin: FC = () => {
   const isAuth = !!useSelector((s: RootState) => s.rootReducer.user?.jwt);
   const isAdmin = !!useSelector((s: RootState) => s.rootReducer.user?.profile?.isAdmin);
   const location = useLocation();
-  
+
   const logoutHandler = () => {
     dispatch(productApi.util.resetApiState());
     dispatch(logout());

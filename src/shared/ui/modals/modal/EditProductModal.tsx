@@ -17,9 +17,5 @@ export const EditProductModal = () => {
     navigate(-1);
   };
 
-  return (
-    <Modal header="Редактировать товар" visible={visible} onClose={onClosed}>
-    
-    </Modal>
-  );
+  return <Modal header="Редактировать товар" visible={visible} onClose={onClosed}></Modal>;
 };
