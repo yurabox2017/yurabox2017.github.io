@@ -2,12 +2,12 @@ import React, { memo, useEffect, useState } from 'react';
 import { CartButton } from '../cartButton';
 import { RootState } from 'src/features/store/store';
 import { useSelector } from 'react-redux';
-import { Product } from 'src/entities/types/product';
+import { Product as ProductEntity } from 'src/entities/types/product';
 import Modal from '../modals/modal/Modal';
 import FormProduct from '../formProduct/FormProduct';
 import { useDeleteProductMutation } from 'src/services/api/productApi.slice';
 
-const Product = memo(function ShortProduct(product: Product) {
+export const Product = memo(function ShortProduct(product: ProductEntity) {
   const [visible, setVisible] = useState(false);
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
@@ -60,5 +60,3 @@ const Product = memo(function ShortProduct(product: Product) {
     </>
   );
 });
-
-export default Product;

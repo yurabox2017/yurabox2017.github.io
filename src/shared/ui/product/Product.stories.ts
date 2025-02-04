@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Product from './Product';
+import { Product } from './Product';
 
 const meta: Meta<typeof Product> = {
   title: 'Homework2/ShortProduct',

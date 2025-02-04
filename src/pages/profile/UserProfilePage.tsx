@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
 
-const UserProfile = () => {
+export const UserProfilePage = () => {
   const { profile } = useSelector((s: RootState) => s.rootReducer.user);
 
   return (
@@ -57,4 +57,3 @@ const UserProfile = () => {
     </div>
   );
 };
-export default UserProfile;

@@ -3,7 +3,7 @@ import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
 import { useGetProductsQuery } from 'src/services/api/productApi.slice';
 
-const ProductPage = () => {
+export const ProductPage = () => {
   const [page, setPage] = useState(1);
   const { isLoading, data: response, isFetching } = useGetProductsQuery(page);
 
@@ -22,5 +22,3 @@ const ProductPage = () => {
     </div>
   );
 };
-
-export default ProductPage;

@@ -9,7 +9,7 @@ import { IFormLogin } from 'src/entities/interfaces/IFormLogin';
 import { useSignInMutation } from 'src/services/api/authApi.slice';
 import type { SignInBody } from 'src/entities/types/signIn';
 
-function Login() {
+export const Login = () => {
   const {
     register,
     handleSubmit,
@@ -90,6 +90,4 @@ function Login() {
       </div>
     </>
   );
-}
-
-export default Login;
+};

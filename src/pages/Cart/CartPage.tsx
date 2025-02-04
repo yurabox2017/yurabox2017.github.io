@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
 import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
-import Product from 'src/shared/ui/product/Product';
-import { Product } from 'src/entities/types/product';
+import { Product } from 'src/shared/ui/product/Product';
+import type { Product as ProductEntity } from 'src/entities/types/product';
 import { OrderButton } from 'src/shared/ui/order/OrderButton';
 
 const CartPage = () => {
-  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+  const [cartProducts, setCartProducts] = useState<ProductEntity[]>([]);
   const [loadProductById, { isLoading }] = useLazyGetProductByIdQuery();
 
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
 
-  const getProduct = async (id: string): Promise<Product> => {
+  const getProduct = async (id: string): Promise<ProductEntity> => {
     try {
       const product = await loadProductById(id).unwrap();
       return product;
