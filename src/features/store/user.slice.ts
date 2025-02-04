@@ -3,7 +3,7 @@ import { loadState } from './storage';
 import { IUserProfile } from 'src/entities/interfaces/IUserProfile';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { SignUpBody } from 'src/entities/types/signUp';
-import { ExtraParams, RootState } from './store';
+import { ExtraParams } from './store';
 
 export const JWT_PERSISTENT_STATE = 'userData';
 

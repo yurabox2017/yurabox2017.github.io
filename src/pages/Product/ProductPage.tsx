@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
-import { useGetProductsQuery, useLazyGetProductsQuery } from 'src/services/api/productApi.slice';
-import { round } from 'src/homeworks/ts1/1_base';
+import { useGetProductsQuery } from 'src/services/api/productApi.slice';
 
 const ProductPage = () => {
   const [page, setPage] = useState(1);
