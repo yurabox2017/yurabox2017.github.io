@@ -1,11 +1,4 @@
-export type Category = {
-  id: string;
-  name: string;
-  photo?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  commandId: string;
-};
+import { Category } from './category';
 
 export type Product = {
   id: string;

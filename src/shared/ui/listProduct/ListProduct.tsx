@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
 import FuncProps from 'src/entities/interfaces/IFuncProps';
-import ShortProduct from '../shortProduct/ShortProduct';
+import Product from '../product/Product';
 
 export const ListProduct: FC<FuncProps> = ({ products }) => {
-  return products.map((product, i: number) => <ShortProduct key={i} {...product} />);
+  return products.map((product, i: number) => <Product key={i} {...product} />);
 };

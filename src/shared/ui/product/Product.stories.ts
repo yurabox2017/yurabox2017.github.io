@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ShortProduct from './ShortProduct';
+import Product from './Product';
 
-const meta: Meta<typeof ShortProduct> = {
+const meta: Meta<typeof Product> = {
   title: 'Homework2/ShortProduct',
-  component: ShortProduct,
+  component: Product,
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',

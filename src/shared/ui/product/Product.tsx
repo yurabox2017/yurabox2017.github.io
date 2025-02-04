@@ -7,7 +7,7 @@ import Modal from '../modals/modal/Modal';
 import FormProduct from '../formProduct/FormProduct';
 import { useDeleteProductMutation } from 'src/services/api/productApi.slice';
 
-const ShortProduct = memo(function ShortProduct(product: Product) {
+const Product = memo(function ShortProduct(product: Product) {
   const [visible, setVisible] = useState(false);
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
@@ -61,4 +61,4 @@ const ShortProduct = memo(function ShortProduct(product: Product) {
   );
 });
 
-export default ShortProduct;
+export default Product;

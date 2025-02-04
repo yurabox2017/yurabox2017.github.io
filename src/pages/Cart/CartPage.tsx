@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
 import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
-import ShortProduct from 'src/shared/ui/shortProduct/ShortProduct';
+import Product from 'src/shared/ui/product/Product';
 import { Product } from 'src/entities/types/product';
 import { OrderButton } from 'src/shared/ui/order/OrderButton';
 
@@ -52,7 +52,7 @@ const CartPage = () => {
             if (!cartProduct) {
               return;
             }
-            return <ShortProduct key={cartProduct.id} {...cartProduct} />;
+            return <Product key={cartProduct.id} {...cartProduct} />;
           })}
         </div>
       </div>
