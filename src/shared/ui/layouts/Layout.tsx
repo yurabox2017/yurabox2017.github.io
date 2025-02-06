@@ -8,7 +8,7 @@ function Layout() {
     <>
       <Header />
 
-      <div className="container overflow-auto" style={{ marginTop: '4rem', height: 'calc(100vh - 7rem)' }}>
+      <div className="container overflow-y-auto" style={{ marginTop: '4rem', height: 'calc(100vh - 7rem)' }}>
         <Outlet />
       </div>
     </>

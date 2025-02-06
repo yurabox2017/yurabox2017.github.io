@@ -1,19 +1,15 @@
 import React, { FC, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import cn from 'clsx';
-import { useDispatch } from 'react-redux';
-import { AppDispath } from 'src/features/store/store';
-import IShortProduct from 'src/entities/interfaces/IShortProduct';
-import { productApi, useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
+import {  useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
 import { Product } from 'src/entities/types/product';
 
-interface IFormProps {
+interface IProductProps {
   product?: Product;
   setUnVisible?: () => void;
 }
 
-const FormProduct: FC<IFormProps> = ({ product, setUnVisible }) => {
-  const dispatch = useDispatch<AppDispath>();
+export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
   const {
     register,
     handleSubmit,
@@ -25,7 +21,6 @@ const FormProduct: FC<IFormProps> = ({ product, setUnVisible }) => {
   const [editProduct, { isLoading: isEditLoading, isSuccess: isEditSuccess }] = useEditProductMutation();
 
   const onAddSubmit: SubmitHandler<Product> = (data) => {
-    dispatch(productApi.util.resetApiState());
     addProduct({
       ...data,
       categoryId: '6792aaab8e877ac8a95a8a89',
@@ -113,4 +108,3 @@ const FormProduct: FC<IFormProps> = ({ product, setUnVisible }) => {
     </form>
   );
 };
-export default FormProduct;

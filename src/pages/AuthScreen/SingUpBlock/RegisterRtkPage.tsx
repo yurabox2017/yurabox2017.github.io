@@ -21,7 +21,7 @@ export const RegisterRtkPage = () => {
       const errMsg: ServerErrors = 'error' in error ? error.error : JSON.parse(JSON.stringify(error.data));
       alert(errMsg?.errors[0]?.message);
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, navigate]);
 
   return (
     <>

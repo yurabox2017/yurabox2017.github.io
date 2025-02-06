@@ -1,11 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PREFIX } from './API';
 import type { Product } from 'src/entities/types/product';
-import { productActions } from 'src/features/store/product.slice';
-import { ServerErrors } from 'src/entities/types/serverErrors';
 import { RootState } from 'src/features/store/store';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
 
 export type Params = {
   name: string;
@@ -53,10 +49,12 @@ export const productApi = createApi({
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCash, newItem) => {
-        if (newItem.pagination.pageNumber === 1) currentCash.data = [];
+      merge: (currentCash, newItem, { arg }) => {
+        const page = arg;
 
-        currentCash.data.push(...newItem.data);
+        if (page === 1) return newItem;
+
+        currentCash.data.unshift(...newItem.data);
       },
       forceRefetch: ({ currentArg, previousArg }) => {
         return currentArg !== previousArg;

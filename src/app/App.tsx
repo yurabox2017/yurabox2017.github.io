@@ -9,14 +9,14 @@ import { CustomRoutes } from 'src/routes/customRoutes';
 function App() {
   const [theme, setTheme] = useState<Theme>(() => 'light');
 
-  const setHtmlAttribute = useCallback(() => {
+  const setHtmlAttribute = () => {
     const html = document.querySelector('html');
     if (html) html.setAttribute('data-bs-theme', theme);
-  }, [theme]);
+  };
 
   useEffect(() => {
     setHtmlAttribute();
-  }, [theme, setHtmlAttribute]);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));

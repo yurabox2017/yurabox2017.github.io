@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FormProduct from '../../formProduct/FormProduct';
+import { FormProduct } from '../../product/formProduct/FormProduct';
 import Modal from './Modal';
 import { useNavigate } from 'react-router';
 

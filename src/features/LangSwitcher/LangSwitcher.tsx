@@ -8,7 +8,7 @@ export type ThemeSwitcherProps = {
   className?: string;
 };
 
-export const LangSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
+export const LangSwitcher: FC<ThemeSwitcherProps> = () => {
   const { i18n } = useTranslation();
 
   const lang = (i18n.language as Locale) === Locale.ru ? Locale.en : Locale.ru;

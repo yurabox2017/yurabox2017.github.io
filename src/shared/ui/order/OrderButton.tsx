@@ -25,9 +25,9 @@ export const OrderButton = ({ total }: IOrderButtonProps) => {
     } else if (error) {
       alert(error);
     }
-  }, [data, error, isSuccess]);
+  }, [data, error, isSuccess, dispatch]);
   return (
-    <button className="btn btn-success" disabled={isLoading || !isAuth} onClick={createOrderHandler}>
+    <button className="btn btn-success w-50" disabled={isLoading || !isAuth} onClick={createOrderHandler}>
       Оформить за: {total}
       <span>₽</span>
     </button>

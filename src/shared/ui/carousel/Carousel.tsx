@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import CarouselImage from './CarouselImage';
 
 export const Carousel: FC<{ images: string[] }> = ({ images }) => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import FormProduct from '../../formProduct/FormProduct';
-import Modal from './Modal';
 import { useNavigate } from 'react-router';
+import Modal from './Modal';
+import { FormCategory } from '../../category/FormCategory';
 
-export const EditProductModal = () => {
+export const AddCategoryModal = () => {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -13,9 +13,12 @@ export const EditProductModal = () => {
   }, []);
 
   const onClosed = () => {
-    setVisible(false);
     navigate(-1);
   };
 
-  return <Modal header="Редактировать товар" visible={visible} onClose={onClosed}></Modal>;
+  return (
+    <Modal header="Добавить категорию" visible={visible} onClose={onClosed}>
+      <FormCategory setUnVisible={onClosed} />
+    </Modal>
+  );
 };

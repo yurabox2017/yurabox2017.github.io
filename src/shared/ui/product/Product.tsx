@@ -1,13 +1,13 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { CartButton } from '../cartButton';
 import { RootState } from 'src/features/store/store';
 import { useSelector } from 'react-redux';
 import { Product as ProductEntity } from 'src/entities/types/product';
 import Modal from '../modals/modal/Modal';
-import FormProduct from '../formProduct/FormProduct';
+import { FormProduct } from './formProduct/FormProduct';
 import { useDeleteProductMutation } from 'src/services/api/productApi.slice';
 
-export const Product = memo(function ShortProduct(product: ProductEntity) {
+export const Product = memo((product: ProductEntity) => {
   const [visible, setVisible] = useState(false);
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
@@ -33,10 +33,15 @@ export const Product = memo(function ShortProduct(product: ProductEntity) {
   return (
     <>
       <div className="card text-center" style={{ width: '15rem', height: '25rem' }}>
-        <img src={product.photo} className="card-img-top" alt="..." style={{ objectFit: 'contain', height: '10rem' }} />
+        <img
+          src={product.photo ?? '/no-pictures.png'}
+          className="card-img-top"
+          alt="..."
+          style={{ objectFit: 'contain', height: '10rem' }}
+        />
         <div className="card-body">
           <h5 className="card-title">Название: {product.name}</h5>
-          <div className="overflow-scroll" style={{ height: '50px' }}>
+          <div className="overflow-y-hidden" style={{ height: '100px' }}>
             <p className="card-subtitle ">Описание: {product.desc}</p>
           </div>
         </div>

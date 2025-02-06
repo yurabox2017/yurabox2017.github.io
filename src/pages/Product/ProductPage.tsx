@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
-import { useGetProductsQuery } from 'src/services/api/productApi.slice';
+import { productApi, useGetProductsQuery } from 'src/services/api/productApi.slice';
+import { useDispatch } from 'react-redux';
+import { AppDispath } from 'src/features/store/store';
 
 export const ProductPage = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, data: response, isFetching } = useGetProductsQuery(page);
-
+  const { data: response, isFetching } = useGetProductsQuery(page);
+  const dispatch = useDispatch<AppDispath>();
   const { ref } = useInView({ threshold: 1, onChange: () => handleLoadMoreProducts() });
 
   const handleLoadMoreProducts = async () => {
@@ -15,9 +17,16 @@ export const ProductPage = () => {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(productApi.util.invalidateTags(['Product']));
+    };
+  }, []);
+
+  if ((response?.data?.length === 0 || !response?.data) && !isFetching) return <span>нет товаров</span>;
   return (
     <div className="row row-cols-1 gap-3 justify-content-center">
-      {response?.data && <ListProduct products={response?.data} />}
+      <ListProduct products={response?.data} />
       <span ref={ref}>{isFetching && <span>Loading...</span>}</span>
     </div>
   );

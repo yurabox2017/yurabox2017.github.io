@@ -3,10 +3,7 @@ import ModalOverlay from './ModalOverlay';
 import './Modal.css';
 import IModal from '../../../entities/interfaces/IModal';
 
-// const modalRoot = document.getElementById('root-modal');
-
-function Modal({ visible, header = '', children, onClose }: IModal) {
-  // return ReactDOM.createPortal(
+function Modal({ header = '', children, onClose }: IModal) {
   return (
     <>
       <div className="modal fade show modal-container" role="dialog">
@@ -27,9 +24,6 @@ function Modal({ visible, header = '', children, onClose }: IModal) {
       <ModalOverlay />
     </>
   );
-  // ,
-  // modalRoot
-  // );
 }
 
 export default Modal;

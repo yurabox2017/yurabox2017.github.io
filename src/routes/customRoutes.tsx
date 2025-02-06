@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router';
-import { EditProductModal } from 'src/shared/ui/modals/modal/EditProductModal';
 import Layout from 'src/shared/ui/layouts/Layout';
 import { ProtectedRouteAdmin } from 'src/routes/helpers/ProtectedRouteAdmin';
 import { RequireAuth } from 'src/routes/helpers/RequireAuth';
@@ -12,6 +11,8 @@ import { RegisterRtkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterRtkPag
 import { ProductPage } from 'src/pages/product/ProductPage';
 import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
 import { UserProfilePage } from 'src/pages/profile/UserProfilePage';
+import { CategoryPage } from 'src/pages/category/CategoryPage';
+import { AddCategoryModal } from 'src/shared/ui/modals/modal/AddCategoryModal';
 
 export const CustomRoutes = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ export const CustomRoutes = () => {
           <Route path="/login" Component={Login}></Route>
           <Route path="/register-rtk" Component={RegisterRtkPage}></Route>
           <Route path="/register-thunk" Component={RegisterThunkPage}></Route>
+          <Route path="*" Component={CategoryPage}></Route>
           <Route path="*" Component={ErrorPage}></Route>
         </Route>
       </Routes>
@@ -48,10 +50,10 @@ export const CustomRoutes = () => {
             }
           />
           <Route
-            path="/listProduct/edit"
+            path="/addCategory"
             element={
               <ProtectedRouteAdmin>
-                <EditProductModal />
+                <AddCategoryModal />
               </ProtectedRouteAdmin>
             }
           />

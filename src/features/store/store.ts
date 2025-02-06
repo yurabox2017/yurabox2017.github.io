@@ -9,6 +9,7 @@ import { authApi } from 'src/services/api/authApi.slice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { productApi } from 'src/services/api/productApi.slice';
 import { orderApi } from 'src/services/api/orderApi.slice';
+import { categoryApi } from 'src/services/api/categoryApi.slice';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -40,7 +42,8 @@ export const store = configureStore({
     })
       .concat(authApi.middleware)
       .concat(productApi.middleware)
-      .concat(orderApi.middleware),
+      .concat(orderApi.middleware)
+      .concat(categoryApi.middleware),
 });
 
 setupListeners(store.dispatch);
