@@ -12,12 +12,8 @@ export const CartPage = () => {
   const cartItems = useSelector((s: RootState) => s.rootReducer.cart.items);
 
   const getProduct = async (id: string): Promise<ProductEntity> => {
-    try {
-      const product = await loadProductById(id).unwrap();
-      return product;
-    } catch (e) {
-      return null;
-    }
+    const product = await loadProductById(id).unwrap();
+    return product;
   };
 
   const loadCartProducts = async () => {

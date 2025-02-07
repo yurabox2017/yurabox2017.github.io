@@ -31,7 +31,7 @@ export const CustomRoutes = () => {
               </RequireAuth>
             }
           />
-          <Route path="/cart" Component={CartPage}></Route>
+          <Route path="https://yurabox2017.github.io/cart" Component={CartPage}></Route>
           <Route path="/" Component={ProductPage} />
           <Route path="/login" Component={Login}></Route>
           <Route path="/register-rtk" Component={RegisterRtkPage}></Route>
