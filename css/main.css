@@ -1,15 +1,17 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.w-40 {
+  width: 40% !important;
 }
 
 .App {
@@ -79,6 +81,15 @@ code {
   }
 }
 
+.layout {
+    width: 1440px;
+    height: 1036px;
+    top: 162px;
+    left: 80px;
+    gap: 0px;
+    border-radius: 20px 20px 0px 0px;
+    opacity: 0px;
+}
 .modal-overlay {
     opacity: 0.6
 }
@@ -88,15 +99,6 @@ code {
     height: 88%;
     left: 30%;
     overflow: hidden;
-}
-.layout {
-    width: 1440px;
-    height: 1036px;
-    top: 162px;
-    left: 80px;
-    gap: 0px;
-    border-radius: 20px 20px 0px 0px;
-    opacity: 0px;
 }
 @charset "UTF-8";
 /*!
