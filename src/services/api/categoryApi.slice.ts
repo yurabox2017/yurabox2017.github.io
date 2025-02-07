@@ -3,6 +3,7 @@ import { PREFIX } from './API';
 import { Category } from 'src/entities/types/category';
 import { RootState } from 'src/features/store/store';
 import { ServerErrors } from 'src/entities/types/serverErrors';
+import { transformError } from 'src/shared/helpers/transformError';
 
 type Params = {
   name: string;
@@ -48,13 +49,7 @@ export const categoryApi = createApi({
         method: 'POST',
         body: data,
       }),
-      transformErrorResponse: (error) => {
-        if ('status' in error) {
-          const serverErrors = error.data as ServerErrors;
-          return serverErrors.errors[0]?.message;
-        }
-        return error;
-      },
+      transformErrorResponse: (e) => transformError(e),
       invalidatesTags: ['Category'],
     }),
     editCategory: build.mutation<Category, { params: Params; id: string }>({
@@ -63,13 +58,7 @@ export const categoryApi = createApi({
         method: 'PUT',
         body: data,
       }),
-      transformErrorResponse: (error) => {
-        if ('status' in error) {
-          const serverErrors = error.data as ServerErrors;
-          return serverErrors.errors[0]?.message;
-        }
-        return error;
-      },
+      transformErrorResponse: (e) => transformError(e),
       invalidatesTags: ['Category'],
     }),
     deleteCategory: build.mutation<Category, string>({

@@ -3,6 +3,8 @@ import { PREFIX } from './API';
 import type { Product } from 'src/entities/types/product';
 import { RootState } from 'src/features/store/store';
 import { cartActions } from 'src/features/store/cart.slice';
+import { ServerErrors } from 'src/entities/types/serverErrors';
+import { transformError } from 'src/shared/helpers/transformError';
 
 export type Params = {
   name: string;
@@ -64,11 +66,7 @@ export const productApi = createApi({
     getProductById: build.query<Product, string>({
       query: (id) => `/products/${id}`,
       providesTags: ['Product'],
-      transformErrorResponse: (error) => {
-        if ('status' in error) {
-          return error;
-        }
-      },
+      transformErrorResponse: (e) => transformError(e),
     }),
     addProduct: build.mutation<Product, Params>({
       query: (data) => ({
@@ -76,6 +74,7 @@ export const productApi = createApi({
         method: 'POST',
         body: data,
       }),
+      transformErrorResponse: (e) => transformError(e),
       invalidatesTags: ['Product'],
     }),
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import cn from 'clsx';
 import { Params, useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
@@ -22,12 +22,21 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
   const [addProduct, { isLoading: isAddLoading, isSuccess: isAddSuccess }] = useAddProductMutation();
   const [editProduct, { isLoading: isEditLoading, isSuccess: isEditSuccess }] = useEditProductMutation();
   const { data: response } = useGetCategoriesQuery(1);
+  const [error, setError] = useState([]);
 
-  const onAddSubmit: SubmitHandler<Params> = (data) => {
-    addProduct(data);
+  const onAddSubmit: SubmitHandler<Params> = async (data) => {
+    try {
+      await addProduct(data).unwrap();
+    } catch (error) {
+      setError(error);
+    }
   };
-  const onUpdateSubmit: SubmitHandler<Params> = (data) => {
-    editProduct({ params: data, id: product.id });
+  const onUpdateSubmit: SubmitHandler<Params> = async (data) => {
+    try {
+      await editProduct({ params: data, id: product.id }).unwrap();
+    } catch (error) {
+      setError(error);
+    }
   };
 
   useEffect(() => {
@@ -67,11 +76,8 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <label className="form-label">Название</label>
         <input
           type="text"
-          className={cn(['form-control', errors.name && 'is-invalid'])}
-          {...register('name', {
-            required: true,
-            minLength: 3,
-          })}
+          className={cn(['form-control', error.includes('name') && 'is-invalid'])}
+          {...register('name')}
           required
         />
       </div>
@@ -81,8 +87,8 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         </label>
         <select
           name="category"
-          className={cn(['form-select', errors.categoryId && 'is-invalid'])}
-          {...register('categoryId', { required: true })}
+          className={cn(['form-select', error.includes('categoryId') && 'is-invalid'])}
+          {...register('categoryId')}
           required
         >
           <option value="">Выберите</option>
@@ -97,11 +103,8 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <label className="form-label">Описание</label>
         <input
           type="text"
-          className={cn(['form-control', errors.desc && 'is-invalid'])}
-          {...register('desc', {
-            required: true,
-            minLength: 3,
-          })}
+          className={cn(['form-control', error.includes('desc') && 'is-invalid'])}
+          {...register('desc')}
           required
         />
       </div>
@@ -112,11 +115,8 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <input
           id="price"
           type="number"
-          className={cn(['form-control', errors.price && 'is-invalid'])}
-          {...register('price', {
-            required: true,
-            minLength: 3,
-          })}
+          className={cn(['form-control', error.includes('price') && 'is-invalid'])}
+          {...register('price')}
           required
         />
       </div>
