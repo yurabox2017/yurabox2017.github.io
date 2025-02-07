@@ -5,7 +5,7 @@ import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
 import type { Product as ProductEntity } from 'src/entities/types/product';
 import { Cart } from 'src/shared/ui/cart/Cart';
 
-const CartPage = () => {
+export const CartPage = () => {
   const [cartProducts, setCartProducts] = useState<ProductEntity[]>([]);
   const [loadProductById, { isLoading }] = useLazyGetProductByIdQuery();
 
@@ -34,5 +34,3 @@ const CartPage = () => {
   if (cartProducts.length === 0) return <span>нет товаров в корзине</span>;
   return <Cart cartProducts={cartProducts} cartItems={cartItems} />;
 };
-
-export default CartPage;

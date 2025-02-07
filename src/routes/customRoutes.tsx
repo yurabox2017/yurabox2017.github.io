@@ -6,7 +6,7 @@ import { RequireAuth } from 'src/routes/helpers/RequireAuth';
 import { ErrorPage } from 'src/pages/error/ErrorPage';
 import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
 import { RegisterThunkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterThunkPage';
-import CartPage from 'src/pages/cart/CartPage';
+import { CartPage } from 'src/pages/cart/CartPage';
 import { RegisterRtkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterRtkPage';
 import { ProductPage } from 'src/pages/product/ProductPage';
 import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
