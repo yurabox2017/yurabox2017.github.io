@@ -13,7 +13,7 @@ import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
 import { UserProfilePage } from 'src/pages/profile/UserProfilePage';
 import { CategoryPage } from 'src/pages/category/CategoryPage';
 import { AddCategoryModal } from 'src/shared/ui/modals/modal/AddCategoryModal';
-import { CartPage } from 'src/pages/cartPage/CartPage';
+import { CartPage } from 'src/pages/cart/CartPage';
 
 export const CustomRoutes = () => {
   const location = useLocation();
