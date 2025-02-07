@@ -6,13 +6,14 @@ import { RequireAuth } from 'src/routes/helpers/RequireAuth';
 import { ErrorPage } from 'src/pages/error/ErrorPage';
 import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
 import { RegisterThunkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterThunkPage';
-import { CartPage } from 'src/pages/cart/CartPage';
+
 import { RegisterRtkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterRtkPage';
 import { ProductPage } from 'src/pages/product/ProductPage';
 import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
 import { UserProfilePage } from 'src/pages/profile/UserProfilePage';
 import { CategoryPage } from 'src/pages/category/CategoryPage';
 import { AddCategoryModal } from 'src/shared/ui/modals/modal/AddCategoryModal';
+import { CartPage } from 'src/pages/cartPage/CartPage';
 
 export const CustomRoutes = () => {
   const location = useLocation();
