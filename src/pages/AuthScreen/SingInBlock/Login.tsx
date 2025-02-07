@@ -8,8 +8,10 @@ import { Link, useNavigate } from 'react-router';
 import { IFormLogin } from 'src/entities/interfaces/IFormLogin';
 import { useSignInMutation } from 'src/services/api/authApi.slice';
 import type { SignInBody } from 'src/entities/types/signIn';
+import { useTranslation } from 'react-i18next';
 
 export const Login = () => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -55,7 +57,7 @@ export const Login = () => {
         />
 
         <label htmlFor="password" className="form-label">
-          Пароль
+          {t('password')}
         </label>
         <input
           type="password"
@@ -74,19 +76,19 @@ export const Login = () => {
           ])}
           htmlFor="btncheck1"
         >
-          Админ
+          {t('admin')}
         </label>
         <input type="checkbox" className="btn-check" id="btncheck1" checked={checked} onChange={handleChange} />
 
         <button type="submit" className="btn btn-primary" disabled={isLoading}>
-          Войти
+          {t('signIn')}
         </button>
       </form>
       <div className="mt-3">
-        <div>Нет акканута?</div>
-        <Link to="/register-rtk">Зарегистрироваться(rtk)</Link>
+        <div>{t('notMember')}?</div>
+        <Link to="/register-rtk"> {t('signUp')}(rtk)</Link>
         <div className="vr mx-3"></div>
-        <Link to="/register-thunk">Зарегистрироваться(thunk)</Link>
+        <Link to="/register-thunk">{t('signUp')}(thunk)</Link>
       </div>
     </>
   );

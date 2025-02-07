@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/features/store/store';
 import { useLazyGetProductByIdQuery } from 'src/services/api/productApi.slice';
@@ -28,7 +28,7 @@ export const CartPage = () => {
 
   useEffect(() => {
     loadCartProducts();
-  }, [cartItems]);
+  }, [cartItems, loadCartProducts]);
 
   if (isLoading) return <span>Loading...</span>;
   if (cartProducts.length === 0) return <span>нет товаров в корзине</span>;

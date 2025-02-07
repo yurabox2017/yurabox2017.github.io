@@ -7,6 +7,11 @@ export const translation = {
       key4: '2022-2023гг проходил обучение по курсу AspNet core Otus.',
       teststorybook: 'Привет мир!',
       save: 'Сохранить',
+      signIn: 'Войти',
+      signUp: 'Зарегистрироваться',
+      notMember: 'Нет аккаунта',
+      admin: 'Админ',
+      password: 'Пароль',
     },
   },
   en: {
@@ -17,6 +22,11 @@ export const translation = {
       key4: '2022-2023 studied at the AspNet core Otus course.',
       teststorybook: 'Hello world!',
       save: 'Save',
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
+      notMember: 'Not a member',
+      admin: 'Admin',
+      password: 'Password',
     },
   },
 };

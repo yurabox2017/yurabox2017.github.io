@@ -1,27 +1,27 @@
 import React, { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Category } from 'src/entities/types/category';
-import { categoryApi, useAddCategoryMutation, useEditCategoryMutation } from 'src/services/api/categoryApi.slice';
+import { useAddCategoryMutation, useEditCategoryMutation } from 'src/services/api/categoryApi.slice';
 import cn from 'clsx';
 import { useTranslation } from 'react-i18next';
+
 interface ICategoryProps {
   category?: Category;
   setUnVisible?: () => void;
 }
 export const FormCategory: FC<ICategoryProps> = ({ category, setUnVisible }) => {
   const { t } = useTranslation();
-  const [addCategory, { isLoading: isAddLoading, isSuccess: isAddSuccess }] = useAddCategoryMutation();
-  const [editCategory, { isLoading: isEditLoading, isSuccess: isEditSuccess }] = useEditCategoryMutation();
+  const [addCategory, { isLoading: isAddLoading, isSuccess: isAddSuccess, error: addError }] = useAddCategoryMutation();
+  const [editCategory, { isLoading: isEditLoading, isSuccess: isEditSuccess, error: editError }] =
+    useEditCategoryMutation();
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
   } = useForm<Category>({ mode: 'onChange' });
 
   const onAddSubmit: SubmitHandler<Category> = (data) => {
-    // dispatch(categoryApi.util.resetApiState());
     addCategory(data);
   };
   const onUpdateSubmit: SubmitHandler<Category> = (data) => {
@@ -33,12 +33,15 @@ export const FormCategory: FC<ICategoryProps> = ({ category, setUnVisible }) => 
       setValue('photo', category.photo);
     }
   }, [category, setValue]);
+
   useEffect(() => {
     if (isAddSuccess) {
       alert('Категория успешно добавлена!');
       setUnVisible();
+    } else if (addError) {
+      addError;
     }
-  }, [isAddSuccess]);
+  }, [isAddSuccess, addError]);
 
   useEffect(() => {
     if (isEditSuccess) {
@@ -61,11 +64,8 @@ export const FormCategory: FC<ICategoryProps> = ({ category, setUnVisible }) => 
         <label className="form-label">Название</label>
         <input
           type="text"
-          className={cn(['form-control', errors.name && 'is-invalid'])}
-          {...register('name', {
-            required: true,
-            minLength: 3,
-          })}
+          className={cn(['form-control', addError || (editError && 'is-invalid')])}
+          {...register('name')}
           required
         />
       </div>

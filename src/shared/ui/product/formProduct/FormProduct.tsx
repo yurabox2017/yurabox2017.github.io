@@ -1,8 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import cn from 'clsx';
-import {  useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
+import { Params, useAddProductMutation, useEditProductMutation } from 'src/services/api/productApi.slice';
 import { Product } from 'src/entities/types/product';
+import { useGetCategoriesQuery } from 'src/services/api/categoryApi.slice';
+import { useTranslation } from 'react-i18next';
 
 interface IProductProps {
   product?: Product;
@@ -10,24 +12,22 @@ interface IProductProps {
 }
 
 export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     formState: { errors },
-  } = useForm<Product>({ mode: 'onChange' });
+  } = useForm<Params>({ mode: 'onChange' });
   const [addProduct, { isLoading: isAddLoading, isSuccess: isAddSuccess }] = useAddProductMutation();
   const [editProduct, { isLoading: isEditLoading, isSuccess: isEditSuccess }] = useEditProductMutation();
+  const { data: response } = useGetCategoriesQuery(1);
 
-  const onAddSubmit: SubmitHandler<Product> = (data) => {
-    addProduct({
-      ...data,
-      categoryId: '6792aaab8e877ac8a95a8a89',
-    });
+  const onAddSubmit: SubmitHandler<Params> = (data) => {
+    addProduct(data);
   };
-  const onUpdateSubmit: SubmitHandler<Product> = (data) => {
-    editProduct({ params: { ...data, categoryId: '6792aaab8e877ac8a95a8a89' }, id: product.id });
+  const onUpdateSubmit: SubmitHandler<Params> = (data) => {
+    editProduct({ params: data, id: product.id });
   };
 
   useEffect(() => {
@@ -76,6 +76,24 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         />
       </div>
       <div className="mb-3">
+        <label htmlFor="category" className="form-label">
+          Категория
+        </label>
+        <select
+          name="category"
+          className={cn(['form-select', errors.categoryId && 'is-invalid'])}
+          {...register('categoryId', { required: true })}
+          required
+        >
+          <option value="">Выберите</option>
+          {response?.data?.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
         <label className="form-label">Описание</label>
         <input
           type="text"
@@ -103,7 +121,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         />
       </div>
       <button type="submit" className="btn btn-primary" disabled={isAddLoading || isEditLoading}>
-        Сохранить
+        {t('save')}
       </button>
     </form>
   );

@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PREFIX } from './API';
 import { Category } from 'src/entities/types/category';
 import { RootState } from 'src/features/store/store';
+import { ServerErrors } from 'src/entities/types/serverErrors';
 
 type Params = {
   name: string;
@@ -38,6 +39,7 @@ export const categoryApi = createApi({
   endpoints: (build) => ({
     getCategories: build.query<ICategoryResponse, number>({
       query: (page = 1) => `/categories?${urlParams(page)}`,
+      transformResponse: (response: ICategoryResponse) => response,
       providesTags: ['Category'],
     }),
     addCategory: build.mutation<Category, Params>({
@@ -46,6 +48,13 @@ export const categoryApi = createApi({
         method: 'POST',
         body: data,
       }),
+      transformErrorResponse: (error) => {
+        if ('status' in error) {
+          const serverErrors = error.data as ServerErrors;
+          return serverErrors.errors[0]?.message;
+        }
+        return error;
+      },
       invalidatesTags: ['Category'],
     }),
     editCategory: build.mutation<Category, { params: Params; id: string }>({
@@ -54,6 +63,13 @@ export const categoryApi = createApi({
         method: 'PUT',
         body: data,
       }),
+      transformErrorResponse: (error) => {
+        if ('status' in error) {
+          const serverErrors = error.data as ServerErrors;
+          return serverErrors.errors[0]?.message;
+        }
+        return error;
+      },
       invalidatesTags: ['Category'],
     }),
     deleteCategory: build.mutation<Category, string>({

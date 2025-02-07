@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListProduct } from 'src/shared/ui/listProduct';
 import { useInView } from 'react-intersection-observer';
 import { productApi, useGetProductsQuery } from 'src/services/api/productApi.slice';
@@ -21,7 +21,7 @@ export const ProductPage = () => {
     return () => {
       dispatch(productApi.util.invalidateTags(['Product']));
     };
-  }, []);
+  }, [dispatch]);
 
   if ((response?.data?.length === 0 || !response?.data) && !isFetching) return <span>нет товаров</span>;
   return (

@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PREFIX } from './API';
 import type { Product } from 'src/entities/types/product';
 import { RootState } from 'src/features/store/store';
+import { cartActions } from 'src/features/store/cart.slice';
 
 export type Params = {
   name: string;
@@ -91,6 +92,15 @@ export const productApi = createApi({
         url: `/products/${id}`,
         method: 'DELETE',
       }),
+
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(cartActions.delete(id));
+        } catch (e) {
+          alert('Не удалось удалить из корзины');
+        }
+      },
       invalidatesTags: ['Product'],
     }),
   }),
