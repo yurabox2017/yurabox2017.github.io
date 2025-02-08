@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PREFIX } from './API';
+import { baseUrl } from './API';
 import type { Product } from 'src/entities/types/product';
 import { RootState } from 'src/features/store/store';
 import { cartActions } from 'src/features/store/cart.slice';
@@ -35,7 +35,7 @@ const urlParams = (page: number) =>
 export const productApi = createApi({
   reducerPath: 'productApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: PREFIX,
+    baseUrl: baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).rootReducer.user.jwt;
       if (token) headers.set('authorization', `Bearer ${token}`);
@@ -93,6 +93,13 @@ export const productApi = createApi({
         method: 'PUT',
         body: data,
       }),
+      transformErrorResponse: (error) => {
+        if ('status' in error) {
+          const serverErrors = error.data as ServerErrors;
+          return serverErrors.errors[0]?.message;
+        }
+        return error;
+      },
       invalidatesTags: ['Product'],
     }),
     deleteProduct: build.mutation<Product, string>({

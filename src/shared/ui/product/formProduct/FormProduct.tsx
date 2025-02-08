@@ -5,6 +5,7 @@ import { Params, useAddProductMutation, useEditProductMutation } from 'src/servi
 import { Product } from 'src/entities/types/product';
 import { useGetCategoriesQuery } from 'src/services/api/categoryApi.slice';
 import { useTranslation } from 'react-i18next';
+import { da } from '@faker-js/faker/.';
 
 interface IProductProps {
   product?: Product;
@@ -41,10 +42,12 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
 
   useEffect(() => {
     if (product) {
+      debugger
       setValue('name', product.name);
       setValue('desc', product.desc);
       setValue('photo', product.photo);
       setValue('price', product.price);
+      setValue('categoryId', product.category.id);
     }
   }, [product, setValue]);
 
@@ -76,7 +79,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <label className="form-label">Название</label>
         <input
           type="text"
-          className={cn(['form-control', error.includes('name') && 'is-invalid'])}
+          className={cn(['form-control', error?.includes('name') && 'is-invalid'])}
           {...register('name')}
           required
         />
@@ -87,7 +90,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         </label>
         <select
           name="category"
-          className={cn(['form-select', error.includes('categoryId') && 'is-invalid'])}
+          className={cn(['form-select', error?.includes('category') && 'is-invalid'])}
           {...register('categoryId')}
           required
         >
@@ -103,7 +106,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <label className="form-label">Описание</label>
         <input
           type="text"
-          className={cn(['form-control', error.includes('desc') && 'is-invalid'])}
+          className={cn(['form-control', error?.includes('desc') && 'is-invalid'])}
           {...register('desc')}
           required
         />
@@ -115,7 +118,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
         <input
           id="price"
           type="number"
-          className={cn(['form-control', error.includes('price') && 'is-invalid'])}
+          className={cn(['form-control', error?.includes('price') && 'is-invalid'])}
           {...register('price')}
           required
         />

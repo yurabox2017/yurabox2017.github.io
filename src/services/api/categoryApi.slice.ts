@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PREFIX } from './API';
+import { baseUrl } from './API';
 import { Category } from 'src/entities/types/category';
 import { RootState } from 'src/features/store/store';
 import { ServerErrors } from 'src/entities/types/serverErrors';
@@ -28,7 +28,7 @@ const urlParams = (page: number) =>
 export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: PREFIX,
+    baseUrl: baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).rootReducer.user.jwt;
       if (token) headers.set('authorization', `Bearer ${token}`);
