@@ -1,57 +1,47 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/features/store/store';
+import { OrderTable } from 'src/shared/ui/order/OrderTable';
+import { Profile } from 'src/shared/ui/profile/Profile';
 
 export const UserProfilePage = () => {
-  const { profile } = useSelector((s: RootState) => s.rootReducer.user);
-
   return (
-    <div className="container rounded mt-5 mb-5">
-      <div className="row justify-content-center">
-        <div className="col-md-3 border-right">
-          <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-            <img className="rounded-circle mt-5" width="150px" src="businessman (1).png" />
-            <span className="font-weight-bold"></span>
-            <span className="text-black-50"></span>
-            <span> </span>
-          </div>
+    <div className="d-flex align-items-start">
+      <div className="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <button
+          className="nav-link active"
+          id="v-pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-profile"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-profile"
+          aria-selected="false"
+        >
+          Профиль
+        </button>
+        <button
+          className="nav-link"
+          id="v-pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#v-pills-home"
+          type="button"
+          role="tab"
+          aria-controls="v-pills-home"
+          aria-selected="true"
+        >
+          Заказы
+        </button>
+      </div>
+      <div className="tab-content w-100" id="v-pills-tabContent">
+        <div
+          className="tab-pane fade show active"
+          id="v-pills-profile"
+          role="tabpanel"
+          aria-labelledby="v-pills-profile-tab"
+        >
+          <Profile />
         </div>
-        <div className="col-md-5 border-right">
-          <div className="p-3 py-5">
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <h4 className="text-right">Профиль</h4>
-            </div>
-            <div className="row mt-2">
-              <div className="col-md-6">
-                <label className="labels">Имя</label>
-                <input type="text" className="form-control" placeholder="Имя" defaultValue={profile?.firstName} />
-              </div>
-              <div className="col-md-6">
-                <label className="labels">Фамилия</label>
-                <input type="text" className="form-control" defaultValue={profile?.lastName} placeholder="Фамилия" />
-              </div>
-            </div>
-            <div className="row mt-3">
-              <div className="col-md-12">
-                <label className="labels">Мобильный телефон</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="введите телефон"
-                  defaultValue={profile?.phone}
-                />
-              </div>
-              <div className="col-md-12">
-                <label className="labels">Email</label>
-                <input type="text" className="form-control" placeholder="введите email" defaultValue={profile?.email} />
-              </div>
-            </div>
-            <div className="mt-5 text-center">
-              <button className="btn btn-primary profile-button" type="button">
-                Сохранить
-              </button>
-            </div>
-          </div>
+        <div className="tab-pane fade " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <OrderTable />
         </div>
       </div>
     </div>

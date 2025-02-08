@@ -1,8 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PREFIX } from './API';
-import { RootState } from 'src/features/store/store';
 import type { Order, OrderStatus } from '../../entities/types/order';
 import { ServerErrors } from 'src/entities/types/serverErrors';
+import { baseApi } from './baseApi';
 
 type Params = {
   products: Array<{
@@ -12,18 +10,30 @@ type Params = {
   status?: OrderStatus;
 };
 
-export const orderApi = createApi({
-  reducerPath: 'orderApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: PREFIX,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).rootReducer.user.jwt;
-      if (token) headers.set('authorization', `Bearer ${token}`);
-      return headers;
-    },
-  }),
-  tagTypes: ['Order'],
+export interface IOrderResponse {
+  data: Order[];
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+    total: number;
+  };
+}
+
+const urlParams = (page: number) =>
+  new URLSearchParams({
+    pagination: JSON.stringify({
+      pageSize: 30,
+      pageNumber: page,
+    }),
+    sorting: JSON.stringify({ type: 'DESC', field: 'id' }),
+  }).toString();
+
+export const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
+    getOrders: build.query<Order[], number>({
+      query: (page = 1) => `/orders?${urlParams(page)}`,
+      transformResponse: (response: IOrderResponse) => response.data,
+    }),
     createOrder: build.mutation<Order, Params>({
       query: (data) => ({
         url: `/orders`,
@@ -41,4 +51,4 @@ export const orderApi = createApi({
   }),
 });
 
-export const { useCreateOrderMutation } = orderApi;
+export const { useGetOrdersQuery, useCreateOrderMutation } = orderApi;

@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AuthResult } from 'src/entities/types/authResult';
 import { AuthLoginResult, SignInBody } from 'src/entities/types/signIn';
 import { SignUpBody } from 'src/entities/types/signUp';
-import { PREFIX } from './API';
+import { baseUrl } from './API';
 import { ServerErrors } from 'src/entities/types/serverErrors';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: PREFIX }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (build) => ({
     signUp: build.mutation<AuthResult, SignUpBody>({
       query: (data) => ({
