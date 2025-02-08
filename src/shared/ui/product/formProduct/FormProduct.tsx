@@ -42,7 +42,6 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
 
   useEffect(() => {
     if (product) {
-      debugger
       setValue('name', product.name);
       setValue('desc', product.desc);
       setValue('photo', product.photo);
