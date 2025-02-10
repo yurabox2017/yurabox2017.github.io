@@ -8,7 +8,7 @@ import { AddProductModal } from 'src/shared/ui/modals/modal/AddProductModal';
 import { RegisterThunkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterThunkPage';
 
 import { RegisterRtkPage } from 'src/pages/AuthScreen/SingUpBlock/RegisterRtkPage';
-import { ProductPage } from 'src/pages/productPage/ProductPage';
+import { ProductPage } from 'src/pages/product/ProductPage';
 import { Login } from 'src/pages/AuthScreen/SingInBlock/Login';
 import { UserProfilePage } from 'src/pages/profile/UserProfilePage';
 import { CategoryPage } from 'src/pages/category/CategoryPage';

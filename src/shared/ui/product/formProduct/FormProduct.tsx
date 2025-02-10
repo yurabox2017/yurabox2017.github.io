@@ -46,7 +46,7 @@ export const FormProduct: FC<IProductProps> = ({ product, setUnVisible }) => {
       setValue('desc', product.desc);
       setValue('photo', product.photo);
       setValue('price', product.price);
-      setValue('categoryId', product.category.id);
+      setValue('categoryId', product.category?.id);
     }
   }, [product, setValue]);
 

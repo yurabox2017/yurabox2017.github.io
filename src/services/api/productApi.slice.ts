@@ -4,6 +4,7 @@ import type { Product } from 'src/entities/types/product';
 import { RootState } from 'src/features/store/store';
 import { cartActions } from 'src/features/store/cart.slice';
 import { ServerErrors } from 'src/entities/types/serverErrors';
+import { baseApi } from './baseApi';
 
 export type Params = {
   name: string;
@@ -32,17 +33,7 @@ const urlParams = (page: number) =>
     sorting: JSON.stringify({ type: 'DESC', field: 'id' }),
   }).toString();
 
-export const productApi = createApi({
-  reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).rootReducer.user.jwt;
-      if (token) headers.set('authorization', `Bearer ${token}`);
-      return headers;
-    },
-  }),
-  tagTypes: ['Product'],
+export const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query<IProductsResponse, number>({
       query: (page = 1) => `/products?${urlParams(page)}`,

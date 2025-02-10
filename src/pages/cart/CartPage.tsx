@@ -24,7 +24,7 @@ export const CartPage = () => {
 
   useEffect(() => {
     loadCartProducts();
-  }, [cartItems, loadCartProducts]);
+  }, [cartItems]);
 
   if (isLoading) return <span>Loading...</span>;
   if (cartProducts.length === 0) return <span>нет товаров в корзине</span>;
